@@ -1,0 +1,67 @@
+<app-nav-bar></app-nav-bar>
+<body>
+<main>
+    <!---- Make container and card for title, text and search bar ----->
+    <div class="container my-5">
+        <div class="card-body text-center">
+            <h1 class="dashboard-title-font">Liste af Borgere</h1>
+            <h4 class="card-text"> Tryk eller søg på den ønskede borgere for at opdatere journalen</h4>
+            <div class="input-group">
+                <div class="form-outline flex-fill">
+                    <input placeholder="Søg efter borger" type="search" id="form1"
+                           class="form-control form-control-lg"/>
+                </div>
+                <button type="button" class="btn btn-outline-primary btn-lg">Søg</button>
+            </div>
+        </div>
+        <!----- The card which holds the table, where information is shown ------>
+        <div class="card">
+            <table class="table table-hover">
+                <thead class="thead">
+                <tr>
+                    <th scope="col"><h3>Fornavn</h3></th>
+                    <th scope="col"><h3>Efternavn</h3></th>
+                    <th scope="col"><h3>Alder</h3></th>
+                    <th scope="col"><h3>Kommune</h3></th>
+                    <th scope="col"><h3>Udvælg</h3></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><h4>Mark</h4></td>
+                    <td><h4>Otto</h4></td>
+                    <td><h4>82</h4></td>
+                    <td><h4>Esbjerg Kommune</h4></td>
+                    <td>
+                        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#citNavModal">
+                            Vælg
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h4>Mark</h4></td>
+                    <td><h4>Otto</h4></td>
+                    <td><h4>82</h4></td>
+                    <td><h4>Esbjerg Kommune</h4></td>
+                    <td>
+                        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#citNavModal">Vælg
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-citizen-nav-modal></app-citizen-nav-modal>
+</main>
+
+</body>
+<!---- Footer for esthetics :) ----->
+<footer>
+    <div class="bg__card__footer bg-info p-5">
+        <div style="color: #ff7a1d" class="text-center p-3">
+            © 2022 Copyright:
+            <a class="text-white" href="https://www.sosuesbjerg.dk/">SosuSystem.com</a>
+        </div>
+    </div>
+</footer>

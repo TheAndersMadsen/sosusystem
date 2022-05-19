@@ -1,0 +1,66 @@
+.btn-outline-primary:hover, .btn-outline-primary:focus,.btn-outline-primary:active {
+  color: white;
+  background: #ff7a1d;
+  border-color: #ff7a1d;
+}
+.btn-outline-primary {
+  color: #487288;
+}
+.btn-primary {
+  background: #487288;
+}
+.btn-primary:hover, .btn-primary:focus,.btn-primary:active{
+  background: #ff7a1d;
+  border-color: #ff7a1d;
+  outline-color: #487288;
+}
+.thead {
+  color: white;
+  background: #487288;
+}
+.dashboard-title-font{
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #487288;
+}
+.modal {
+  /*Position and width*/
+  position: fixed;
+  width: auto;
+  height: auto;
+
+  /*Centering horizintally*/
+  margin: auto;
+}
+.modal-dialog {
+  position:absolute;
+  top:50% !important;
+  transform: translate(0, -50%) !important;
+  -ms-transform: translate(0, -50%) !important;
+  -webkit-transform: translate(0, -50%) !important;
+  margin:auto -12.5%;
+  width:90%;
+  height:43%;
+}
+.modal-content {
+  min-height:100%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.modal-body {
+  position:absolute;
+  top:45px;
+  bottom:45px;
+  left:0;
+  right:0;
+  overflow-y:auto;
+}
+.modal-footer {
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+}
