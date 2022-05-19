@@ -20,7 +20,7 @@ pipeline {
                     sh "npm install"
                     sh "npm run build"
                 }
-                sh "docker-compose --env-file config/Test.env build api"
+                sh "docker-compose --env-file config/test.env build api"
             }
             post{
                 success{
