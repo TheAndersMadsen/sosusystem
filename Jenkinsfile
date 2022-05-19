@@ -55,14 +55,14 @@ pipeline {
                     sh"npm install"
                     sh"npm run build"
                 }
-                sh "docker-compose --env-file config/Test.env build web"
+                sh "docker-compose --env-file config/test.env build web"
             }
         }
         stage('reset containers') {
             steps{
                 script{
                     try{
-                        sh "docker-compose --env-file ./config/Test.env down"
+                        sh "docker-compose --env-file ./config/test.env down"
                     }
                     finally {}
                 }
@@ -70,7 +70,7 @@ pipeline {
         }
         stage('deployment') {
             steps{
-                sh "docker-compose --env-file ./config/Test.env up -d"
+                sh "docker-compose --env-file ./config/test.env up -d"
             }
         }
 
