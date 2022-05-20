@@ -33,7 +33,7 @@ pipeline {
             steps{
                 script{
                     try{
-                        sh "docker-compose down"
+                        sh "docker-compose --env-file config/test.env down"
                     }
                     finally {}
                 }
