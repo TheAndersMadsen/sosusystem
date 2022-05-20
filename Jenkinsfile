@@ -14,10 +14,7 @@ pipeline {
         stage('Building Project - [SOSUSYSTEM-FRONTEND]') {
             steps{
                 dir("sosusystem-frontend"){
-                    
-                    echo 'Doing npm install..'
                     sh"npm install"
-                    echo 'Doing npm run build..'
                     sh"npm run build"
                 }
             }
