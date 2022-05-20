@@ -3,7 +3,7 @@ version: "3.3"
 services:
     
   web:
-    image: "andersmadsen0/sosusysem-frontend:${BUILD_NUMBER}"
+    image: "andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
     container_name: "sosusystem-frontend-web"
     ports:
       - "4200:80"
