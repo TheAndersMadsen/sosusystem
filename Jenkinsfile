@@ -11,17 +11,14 @@ pipeline {
     }
 
     stages{
-        
         stage('Building Project - [SOSUSYSTEM-FRONTEND]') {
             steps{
-                echo 'Building [SOSUSYSTEM-FRONTEND]..'
                 dir("sosusystem-frontend"){
                     
-                    echo 'CMD: NPM INSTALL'
+                    echo 'Doing npm install..'
                     sh"npm install"
-                    echo 'CMD: NPM RUN BUILD'
+                    echo 'Doing npm run build..'
                     sh"npm run build"
-                    echo 'BUILD COMPLETE!'
                 }
             }
         }
