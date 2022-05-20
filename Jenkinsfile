@@ -9,11 +9,6 @@ pipeline {
 
     stages{
         stage('building: frontend') {
-            when{
-                anyOf{
-                    changeset "sosusystem-frontend/**"
-                }
-            }
             steps{
                 sh"echo 'BUILDING [FRONTEND]..'"
                 dir("sosusystem-frontend"){
