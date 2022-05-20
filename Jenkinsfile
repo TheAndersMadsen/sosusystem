@@ -41,7 +41,7 @@ pipeline {
         }
         stage('deployment') {
             steps{
-                sh "docker-compose up -d"
+                sh "docker-compose --env-file config/test.env up -d"
             }
         }
 
