@@ -3,8 +3,6 @@ version: "3.9"
 services:
     
   web:
-    build:
-      context: "chatmanfront"
     image: "andersmadsen0/sosusysem-frontend"
     container_name: "${WEB_CONT_NAME}"
     ports:
