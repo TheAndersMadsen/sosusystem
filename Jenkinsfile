@@ -12,27 +12,24 @@ pipeline {
 
     stages{
         
-        stage('Building [SOSUSYSTEM-FRONTEND]..') {
+        stage('Building & Delivering To Docker Hub - Frontend') {
             steps{
-                echo 'Building [SOSUSYSTEM-FRONTEND]..'
+                
+                sh"echo 'Deliver To Docker Hub - Frontend..'"
+                
                 dir("sosusystem-frontend"){
                     sh"npm install"
                     sh"npm run build"
-                }
-            }
-        }
-        stage('Delivering To Docker Hub..') {
-            steps{
-                    echo 'Delivering [SOSUSYSTEM-FRONTEND] To Docker Hub..'
                     sh"docker build . -t andersmadsen0/sosusystem-frontend"
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
                         sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
                     }
                     sh"docker push andersmadsen0/sosusystem-frontend"
                 }
+                
             }
         }
-        stage('Reset Docker Environment') {
+        stage('reset containers') {
             steps{
                 script{
                     try{
@@ -42,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('De') {
+        stage('deployment') {
             steps{
                 sh "docker-compose up -d"
             }
