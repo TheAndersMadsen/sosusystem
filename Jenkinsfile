@@ -15,7 +15,7 @@ pipeline {
         stage('Building & Delivering To Docker Hub - Frontend') {
             steps{
                 
-                sh"echo 'Deliver To Docker Hub - Frontend..'"
+                echo 'Delivering [SOSUSYSTEM-FRONTEND] To Docker Hub..'
                 
                 dir("sosusystem-frontend"){
                     sh"npm install"
