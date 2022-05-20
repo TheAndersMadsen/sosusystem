@@ -260,7 +260,7 @@ export class SubjectsService {
   /* Helper Methods */
   /* Generates all basic information
    * Note: We are generating equal titles and subTitles for each subject,
-   * these titles and subTitles could be stored smarter!! - we do not need them
+   * these titles and subTitles could be stored smarter! - we do not need them
    * for each subject as they are all identical */
 
   async createGeneralInformation(): Promise<GeneralInfo[]> {

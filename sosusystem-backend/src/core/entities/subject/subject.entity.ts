@@ -10,8 +10,8 @@ export class Subject {
   email: string;
   phone: string;
   address: Address;
-  generalInformation: GeneralInfo[] = [];
-  healthConditions: HealthCondition[] = [];
-  functionAbilities: FunctionAbility[] = [];
+  generalInformation: GeneralInfo[];
+  healthConditions: HealthCondition[];
+  functionAbilities: FunctionAbility[];
   // notes: Note[] = [];
 }
