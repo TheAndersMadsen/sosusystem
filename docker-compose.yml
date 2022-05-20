@@ -3,26 +3,6 @@ version: "3.9"
 services:
     
   web:
-    build:
-      context: "sosusystem-frontend"
-    image: "localhost:7002/sosusystem_frontend:${IMAGE_TAG}"
-    container_name: "${WEB_CONT_NAME}"
-    ports:
-      - "${WEB_PORT}:80"
-  mongo:
-    image: 'mongo:latest'
-    ports:
-      - '27017:27017'
-    volumes:
-      - 'mongo:/data/db'
-  api:
-    build:
-      context: "sosusystem-backend"
-    image: "localhost:7002/sosusystem-api:${IMAGE_TAG}"
-    container_name: "${API_CONT_NAME}"
-    ports:
-      - "${API_PORT}:80"
-    depends_on:
-      - mongo
-volumes:
-  mongo:
+    hostname: app-host
+    restart: always
+    image: andersmadsen0/sosusystem-frontend
