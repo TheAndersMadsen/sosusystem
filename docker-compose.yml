@@ -1,9 +1,9 @@
-version: "3.9"
+version: "3.3"
 
 services:
     
   web:
     image: "andersmadsen0/sosusysem-frontend"
-    container_name: "${WEB_CONT_NAME}"
+    container_name: "sosusystem-frontend-web"
     ports:
-      - "${WEB_PORT}:80"
+      - "4200:80"
