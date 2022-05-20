@@ -26,6 +26,7 @@ pipeline {
                     }
                     sh"docker push andersmadsen0/sosusystem-frontend"
                     sh "docker-compose build web"
+                    sh "docker-compose up -d"
                 }
             }
         }
