@@ -42,10 +42,11 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Project') {
+        stage('De') {
             steps{
                 sh "docker-compose up -d"
             }
         }
-    }
 
+    }
+}
