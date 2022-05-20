@@ -12,15 +12,26 @@ pipeline {
 
     stages{
         
-        stage('Building & Delivering To Docker Hub - Frontend') {
+        stage('Building Project - [SOSUSYSTEM-FRONTEND]') {
             steps{
-                
-                echo 'Delivering [SOSUSYSTEM-FRONTEND] To Docker Hub..'
-                
+                echo 'Building [SOSUSYSTEM-FRONTEND]..'
                 dir("sosusystem-frontend"){
+                    
+                    echo 'CMD: NPM INSTALL'
                     sh"npm install"
+                    echo 'CMD: NPM RUN BUILD'
                     sh"npm run build"
+                    echo 'BUILD COMPLETE!'
+                }
+            }
+        }
+        stage('Delivering Build To Docker Hub - [SOSUSYSTEM-FRONTEND]') {
+            steps{
+                dir("sosusystem-frontend"){
+                    echo 'Building Docker Image..'
                     sh"docker build . -t andersmadsen0/sosusystem-frontend"
+               
+                    echo 'Logging into Docker Hub..'
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
                         sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
                     }
