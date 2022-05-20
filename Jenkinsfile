@@ -11,6 +11,17 @@ pipeline {
     }
 
     stages{
+        
+        stage('building: frontend') {
+            steps{
+                sh"echo 'BUILDING [FRONTEND]..'"
+                dir("sosusystem-frontend"){
+                    sh"npm install"
+                    sh"npm run build"
+                }
+                sh "docker-compose build web"
+            }
+        }
         stage('Deliver To Docker Hub - Frontend') {
             steps{
                 
@@ -23,16 +34,6 @@ pipeline {
                     }
                     sh"docker push andersmadsen0/sosusystem-frontend"
                 }
-            }
-        }
-        stage('building: frontend') {
-            steps{
-                sh"echo 'BUILDING [FRONTEND]..'"
-                dir("sosusystem-frontend"){
-                    sh"npm install"
-                    sh"npm run build"
-                }
-                sh "docker-compose build web"
             }
         }
         stage('reset containers') {
