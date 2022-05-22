@@ -75,28 +75,5 @@ pipeline {
                 }
             }
         }
-        stage('Run Tests') {
-            parallel {
-                stage('Frontend Tests') {
-                    steps {
-                        echo "Frontend Testing"
-                    }
-                }
-                stage('Backend Tests') {
-                    steps {
-                        echo "Backend Testing"
-                    }
-                }
-            }
-        }
-        stage('Deployment') {
-            steps{
-            }
-            post{
-                success{
-                    echo "Frontend Deployed Successfully!"
-                }
-            }
-        }
     }
 }
