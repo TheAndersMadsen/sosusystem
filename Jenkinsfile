@@ -1,7 +1,17 @@
 pipeline {
-    agent any
+}
 
-    tools {nodejs "NodeJS"}
+
+
+
+
+
+MediaMetadata
+
+
+
+pipeline {
+    agent any
 
     triggers {
         pollSCM "*/5 * * * *"
@@ -11,60 +21,44 @@ pipeline {
     }
 
     stages{
-        stage('Building Stage..') {
+        agent any
+        parameters {
+            run filter: 'SUCCESSFUL', name: 'PROMOTED_BUILD', projectName: 'SOSUSYSTEM'
+        }
+        
+        stage('Delivering Builds To Docker Hub') {
             parallel {
-                stage('Build Frontend') {
+                stage('Delivering Frontend To Docker Hub') {
                     when{
                         anyOf{
                             changeset "sosusystem-frontend/**"
                         }
                     }
                     steps {
-                        echo "Building Frontend.."
+                        echo "Delivering Frontend.."
                         dir("sosusystem-frontend"){
-                            sh"npm install"
-                            sh"npm run build"
+                            echo 'Building Docker Image..'
+                            sh"docker build . -t andersmadsen0/sosusystem-frontend"
+                            echo 'Logging into Docker Hub..'
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
+                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+                            }
+                            sh"docker push andersmadsen0/sosusystem-frontend"
                         }
-                        sh "docker-compose -f docker-compose.yml --env-file config/test.env build frontend"
                     }
                     post{
                         success{
-                            echo "Frontend Built Successfully!"
+                            echo "Frontend Delivered To Docker Hub!"
                         }
                     }
                 }
             }
         }
-        stage('Reset Test Environment') {
-            steps{
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env down"
-                sh "docker system prune -f"
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
-            }
-            post{
-                success{
-                    echo "Test Environemnt Ready!"
-                }
-            }
-        }
-        
-        stage('Deploy Test Environment') {
-            steps{
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
-            }
-            post{
-                success{
-                    echo "Test Environemnt Deployed!"
-                }
-            }
-        }
-        stage("Push images to registry") {
-            steps {
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env push"
-            }
-            post{
-                success{
-                    echo "Images Pushed To Registry!"
+        stages {
+            stage("Deploy to production") {
+                steps {
+                    sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env pull"
+                    sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env up -d"
                 }
             }
         }
