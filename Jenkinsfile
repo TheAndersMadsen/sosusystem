@@ -25,6 +25,7 @@ pipeline {
                             sh"npm install"
                             sh"npm run build"
                         }
+                        sh "docker-compose -f docker-compose.yml --env-file config/test.env build frontend"
                     }
                     post{
                         success{
@@ -34,40 +35,11 @@ pipeline {
                 }
             }
         }
-        stage('Delivering Builds To Docker Hub') {
-            parallel {
-                stage('Delivering Frontend To Docker Hub') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-frontend/**"
-                        }
-                    }
-                    steps {
-                        echo "Delivering Frontend.."
-                        dir("sosusystem-frontend"){
-                            echo 'Building Docker Image..'
-                            sh"docker build . -t andersmadsen0/sosusystem-frontend"
-                            sh "docker-compose --env-file config/test.env build web"
-                            echo 'Logging into Docker Hub..'
-                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
-                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
-                            }
-                            sh"docker push andersmadsen0/sosusystem-frontend"
-                        }
-                    }
-                    post{
-                        success{
-                            echo "Frontend Delivered To Docker Hub!"
-                        }
-                    }
-                }
-            }
-        }
         stage('Reset Test Environment') {
             steps{
-                sh "docker-compose --env-file config/test.env down"
+                sh "docker-compose -f docker-compose.yml --env-file config/test.env down"
                 sh "docker system prune -f"
-                sh "docker-compose --env-file config/test.env up -d"
+                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
             }
             post{
                 success{
@@ -78,7 +50,7 @@ pipeline {
         
         stage('Deploy Test Environment') {
             steps{
-                sh "docker-compose --env-file config/test.env up -d"
+                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
             }
             post{
                 success{
@@ -88,7 +60,7 @@ pipeline {
         }
         stage("Push images to registry") {
             steps {
-                sh "docker-compose --env-file config/test.env push"
+                sh "docker-compose -f docker-compose.yml --env-file config/test.env push"
             }
             post{
                 success{
