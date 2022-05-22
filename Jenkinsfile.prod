@@ -1,69 +1,68 @@
 pipeline {
     agent any
-
-    tools {nodejs "NodeJS"}
-
-    triggers {
-        pollSCM "*/5 * * * *"
+    parameters {
+        run filter: 'SUCCESSFUL', name: 'PROMOTED_BUILD', projectName: 'SOSUSYSTEM'
     }
-
-    stages{
-        stage('Building Stage..') {
+    stages {
+        stage('Delivering Builds To Docker Hub') {
             parallel {
-                stage('Build Frontend') {
+                stage('Delivering Frontend To Docker Hub') {
                     when{
                         anyOf{
                             changeset "sosusystem-frontend/**"
                         }
                     }
                     steps {
-                        echo "Building Frontend.."
+                        echo "Delivering Frontend.."
                         dir("sosusystem-frontend"){
-                            sh"npm install"
-                            sh"npm run build"
+                            echo 'Building Docker Image..'
+                            sh"docker build . -t andersmadsen0/sosusystem-frontend"
+                            echo 'Logging into Docker Hub..'
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
+                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+                            }
+                            sh"docker push andersmadsen0/sosusystem-frontend"
                         }
-                        sh "docker-compose -f docker-compose.yml --env-file config/test.env build frontend"
                     }
                     post{
                         success{
-                            echo "Frontend Built Successfully!"
+                            echo "Frontend Delivered To Docker Hub!"
+                        }
+                    }
+                }
+                stage('Delivering Backend To Docker Hub') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
+                    steps {
+                        echo "Delivering Backend.."
+                        dir("sosusystem-backend"){
+                            echo 'Building Docker Image..'
+                            sh"docker build . -t andersmadsen0/sosusystem-backend"
+                            echo 'Logging into Docker Hub..'
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
+                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+                            }
+                            sh"docker push andersmadsen0/sosusystem-backend"
+                        }
+                    }
+                    post{
+                        success{
+                            echo "Frontend Delivered To Docker Hub!"
                         }
                     }
                 }
             }
         }
-        stage('Reset Test Environment') {
-            steps{
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env down"
-                sh "docker system prune -f"
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
-            }
-            post{
-                success{
-                    echo "Test Environemnt Ready!"
-                }
-            }
-        }
+        stage("Deploy to production") {
         
-        stage('Deploy Test Environment') {
-            steps{
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
-            }
-            post{
-                success{
-                    echo "Test Environemnt Deployed!"
-                }
-            }
-        }
-        stage("Push images to registry") {
-            steps {
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env push"
-            }
-            post{
-                success{
-                    echo "Images Pushed To Registry!"
-                }
+                    sh "docker run -d andersmadsen0/sosusystem-frontend --env-file config/prod.env up -d"
+                    
+                    sh "docker run -d andersmadsen0/sosusystem-backend --env-file config/prod.env up -d"
+
             }
         }
     }
-}
+
