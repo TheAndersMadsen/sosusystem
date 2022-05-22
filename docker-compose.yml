@@ -3,7 +3,7 @@ version: "3.9"
 services:
     
   web:
-    image: "localhost:7002/andersmadsen0/sosusystem-frontend:${IMAGE_TAG}"
+    image: "andersmadsen0/sosusystem-frontend:${IMAGE_TAG}"
     
     container_name: "${WEB_CONT_NAME}"
     ports:
