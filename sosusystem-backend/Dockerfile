@@ -1,1 +1,1 @@
-CMD [ "sh", "-c", "npm run start:prod"]
+CMD ["node", "dist/main"]
