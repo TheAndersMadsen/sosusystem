@@ -3,8 +3,10 @@ version: "3.9"
 services:
     
   web:
-    image: "andersmadsen0/sosusystem-frontend:latest"
-    
+  
+    build:
+      context: "Web"
+    image: "localhost:7002/weather-web:${IMAGE_TAG}"
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
