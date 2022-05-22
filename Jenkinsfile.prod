@@ -1,8 +1,19 @@
 pipeline {
     agent any
+    
+
+    triggers {
+        pollSCM "*/5 * * * *"
+    }
+    environment {
+        dockerhub=credentials('dockerhub')
+    }
     parameters {
         run filter: 'SUCCESSFUL', name: 'PROMOTED_BUILD', projectName: 'SOSUSYSTEM'
     }
+    
+
+
     
     stage('Delivering Builds To Docker Hub') {
         parallel {
