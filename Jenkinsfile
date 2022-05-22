@@ -47,7 +47,7 @@ pipeline {
                         dir("sosusystem-frontend"){
                             echo 'Building Docker Image..'
                             sh"docker build . -t andersmadsen0/sosusystem-frontend"
-
+                            sh "docker-compose --env-file config/test.env build web"
                             echo 'Logging into Docker Hub..'
                             withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
                                 sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
