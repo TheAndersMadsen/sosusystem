@@ -18,5 +18,14 @@ services:
     container_name: "${API_CONT_NAME}"
     ports:
       - "${API_PORT}:80"
+    depends_on:
+      - mongodb
     volumes:
       - /node_modules
+  mongodb:
+    image: 'mongo:latest'
+    container_name: "mongodb"
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'mongodb:/data/db'
