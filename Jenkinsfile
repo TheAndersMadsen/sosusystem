@@ -1,14 +1,3 @@
-pipeline {
-}
-
-
-
-
-
-
-MediaMetadata
-
-
 
 pipeline {
     agent any
