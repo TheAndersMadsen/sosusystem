@@ -29,19 +29,29 @@ pipeline {
                 }
             }
         }
-        stage('Delivering Build To Docker Hub - [SOSUSYSTEM-FRONTEND]') {
-            steps{
-                dir("sosusystem-frontend"){
-                    echo 'Building Docker Image..'
-                    sh"docker build . -t andersmadsen0/sosusystem-frontend"
-               
-                    echo 'Logging into Docker Hub..'
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
-                        sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+        stage('Delivering Builds To Docker Hub') {
+            
+            parallel {
+                stage('Delivering Frontend To Docker Hub') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-frontend/**"
+                        }
                     }
-                    sh"docker push andersmadsen0/sosusystem-frontend"
+                    steps {
+                        echo "Delivering Frontend.."
+                        dir("sosusystem-frontend"){
+                            echo 'Building Docker Image..'
+                            sh"docker build . -t andersmadsen0/sosusystem-frontend"
+
+                            echo 'Logging into Docker Hub..'
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
+                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+                            }
+                            sh"docker push andersmadsen0/sosusystem-frontend"
+                        }
+                    }
                 }
-                
             }
         }
         stage('Resetting Containers') {
