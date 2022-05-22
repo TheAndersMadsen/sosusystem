@@ -5,7 +5,7 @@ services:
   frontend:
     build:
       context: "sosusystem-frontend"
-    image: "localhost:7002/sosusystem-frontend:${IMAGE_TAG}"
+    image: "localhost:7002/andersmadsen0/sosusystem-frontend:latest"
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
