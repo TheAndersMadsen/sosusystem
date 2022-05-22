@@ -35,7 +35,6 @@ pipeline {
             }
         }
         stage('Delivering Builds To Docker Hub') {
-            
             parallel {
                 stage('Delivering Frontend To Docker Hub') {
                     when{
@@ -58,26 +57,40 @@ pipeline {
                     }
                     post{
                         success{
-                            echo "Frontend Delivered Successfully!"
+                            echo "Frontend Delivered To Docker Hub!"
                         }
                     }
                 }
             }
         }
-        stage('Resetting Containers') {
+        stage('Reset Test Environment') {
             steps{
-                script{
-                    try{
-                        sh "docker-compose --env-file config/test.env down"
-                        sh "docker system prune -f"
+                sh "docker-compose --env-file config/test.env down"
+                sh "docker system prune -f"
+                sh "docker-compose --env-file config/test.env up -d"
+            }
+            post{
+                success{
+                    echo "Test Environemnt Ready!"
+                }
+            }
+        }
+        stage('Run Tests') {
+            parallel {
+                stage('Frontend Tests') {
+                    steps {
+                        echo "Frontend Testing"
                     }
-                    finally {}
+                }
+                stage('Backend Tests') {
+                    steps {
+                        echo "Backend Testing"
+                    }
                 }
             }
         }
         stage('Deployment') {
             steps{
-                sh "docker-compose --env-file config/test.env up -d"
             }
             post{
                 success{
