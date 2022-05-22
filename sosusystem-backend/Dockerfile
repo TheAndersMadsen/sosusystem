@@ -1,6 +1,1 @@
-
-FROM sosusystem/sosusystem-backend
-
-COPY dist/ .
-
-CMD ["node", "main"]
+CMD [ "sh", "-c", "npm run start:prod"]
