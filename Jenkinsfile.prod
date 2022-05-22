@@ -41,12 +41,10 @@ pipeline {
                 }
             }
         }
-        stages {
-            stage("Deploy to production") {
-                steps {
-                    sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env pull"
-                    sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env up -d"
-                }
+        stage("Deploy to production") {
+            steps {
+                sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env pull"
+                sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env up -d"
             }
         }
     }
