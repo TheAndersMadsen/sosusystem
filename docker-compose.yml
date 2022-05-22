@@ -13,6 +13,7 @@ services:
     build:
       context: "sosusystem-backend"
     image: "localhost:7002/sosusystem-backend:${IMAGE_TAG}"
+    command: npm run start
     container_name: "${API_CONT_NAME}"
     ports:
       - "${API_PORT}:80"
