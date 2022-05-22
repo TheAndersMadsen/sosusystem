@@ -14,9 +14,6 @@ pipeline {
         stage('Building Stage..') {
             parallel {
                 stage('Build Frontend') {
-                    agent {
-                        label "Frontend Build"
-                    }
                     steps {
                         when {
                             changeset "sosusystem-frontend/**"
