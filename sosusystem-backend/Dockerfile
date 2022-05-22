@@ -1,5 +1,5 @@
 
-FROM pete9991/chatmanbackend
+FROM sosusystem/sosusystem-backend
 
 COPY dist/ .
 
