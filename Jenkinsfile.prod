@@ -30,12 +30,50 @@ pipeline {
                         }
                     }
                 }
+                stage('Delivering Backend To Docker Hub') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
+                    steps {
+                        echo "Delivering Backend.."
+                        dir("sosusystem-backend"){
+                            echo 'Building Docker Image..'
+                            sh"docker build . -t andersmadsen0/sosusystem-backend"
+                            echo 'Logging into Docker Hub..'
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
+                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+                            }
+                            sh"docker push andersmadsen0/sosusystem-backend"
+                        }
+                    }
+                    post{
+                        success{
+                            echo "Frontend Delivered To Docker Hub!"
+                        }
+                    }
+                }
             }
         }
         stage("Deploy to production") {
-            steps {
-            
-                sh "docker run -d andersmadsen0/sosusystem-frontend --env-file config/prod.env up -d"
+            parallel {
+                steps {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-frontend/**"
+                        }
+                    }
+                    sh "docker run -d andersmadsen0/sosusystem-frontend --env-file config/prod.env up -d"
+                }
+                steps {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
+                    sh "docker run -d andersmadsen0/sosusystem-backend --env-file config/prod.env up -d"
+                }
             }
         }
     }
