@@ -34,17 +34,18 @@ pipeline {
                 
             }
         }
-        stage('reset containers') {
+        stage('Resetting Containers') {
             steps{
                 script{
                     try{
                         sh "docker-compose --env-file config/test.env down"
+                        sh "docker system prune -f"
                     }
                     finally {}
                 }
             }
         }
-        stage('deployment') {
+        stage('Deployment') {
             steps{
                 sh "docker-compose --env-file config/test.env up -d"
             }
