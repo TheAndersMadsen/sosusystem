@@ -75,5 +75,26 @@ pipeline {
                 }
             }
         }
+        
+        stage('Deploy Test Environment') {
+            steps{
+                sh "docker-compose --env-file config/test.env up -d"
+            }
+            post{
+                success{
+                    echo "Test Environemnt Deployed!"
+                }
+            }
+        }
+        stage("Push images to registry") {
+            steps {
+                sh "docker-compose --env-file config/test.env push"
+            }
+            post{
+                success{
+                    echo "Images Pushed To Registry!"
+                }
+            }
+        }
     }
 }
