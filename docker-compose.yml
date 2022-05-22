@@ -17,7 +17,6 @@ services:
   backend:
     build:
       context: "sosusystem-backend"
-      target: production
     image: "localhost:7002/sosusystem-backend:${IMAGE_TAG}"
     command: npm run start
     container_name: "${API_CONT_NAME}"
