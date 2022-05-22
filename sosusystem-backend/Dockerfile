@@ -1,4 +1,4 @@
 FROM node:10-alpine
-WORKDIR /app
+WORKDIR ./
 COPY --from=builder ./ ./
 CMD ["npm", "run", "start:prod"]
