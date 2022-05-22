@@ -26,6 +26,11 @@ pipeline {
                             sh"npm run build"
                         }
                     }
+                    post{
+                        success{
+                            echo "Frontend Built Successfully!"
+                        }
+                    }
                 }
             }
         }
@@ -51,6 +56,11 @@ pipeline {
                             sh"docker push andersmadsen0/sosusystem-frontend"
                         }
                     }
+                    post{
+                        success{
+                            echo "Frontend Delivered Successfully!"
+                        }
+                    }
                 }
             }
         }
@@ -68,6 +78,11 @@ pipeline {
         stage('Deployment') {
             steps{
                 sh "docker-compose --env-file config/test.env up -d"
+            }
+            post{
+                success{
+                    echo "Frontend Deployed Successfully!"
+                }
             }
         }
     }
