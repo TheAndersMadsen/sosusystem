@@ -35,8 +35,7 @@ pipeline {
         stage("Deploy to production") {
             steps {
             
-                sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env pull"
-                sh "docker-compose -f docker-compose.prod.yml --env-file config/prod.env up -d"
+                sh "docker run -d andersmadsen0/sosusystem-frontend --env-file config/prod.env up -d"
             }
         }
     }
