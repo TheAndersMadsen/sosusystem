@@ -15,13 +15,12 @@ pipeline {
             parallel {
                 stage('Build Frontend') {
                     steps {
-                        when {
-                            changeset "sosusystem-frontend/**"
-                        }
-                        echo "Building Frontend.."
-                        dir("sosusystem-frontend"){
-                            sh"npm install"
-                            sh"npm run build"
+                        if (changeset "sosusystem-frontend/**") {
+                            echo "Building Frontend.."
+                            dir("sosusystem-frontend"){
+                                sh"npm install"
+                                sh"npm run build"
+                            }
                         }
                     }
                 }
