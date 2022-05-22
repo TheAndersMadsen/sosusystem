@@ -1,8 +1,14 @@
-FROM node:current-slim
-WORKDIR /usr/src/app
-RUN npm i -g @nestjs/cli
-COPY package.json /usr/src/app/package.json 
-RUN npm install 
-COPY . .
+
+FROM node:8-alpine
+
+WORKDIR /app
+
+ADD package.json /app/package.json
+RUN npm config set registry http://registry.npmjs.org
+RUN npm install
+
+ADD . /app
+
 EXPOSE 3000
-CMD ["sh", "-c", "npm run start"]
+
+CMD ["npm", "run", "start"]
