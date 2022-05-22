@@ -11,11 +11,22 @@ pipeline {
     }
 
     stages{
-        stage('Building Project - [SOSUSYSTEM-FRONTEND]') {
-            steps{
-                dir("sosusystem-frontend"){
-                    sh"npm install"
-                    sh"npm run build"
+        stage('Building Stage..') {
+            parallel {
+                stage('Build Frontend') {
+                    agent {
+                        label "Frontend Build"
+                    }
+                    steps {
+                        when {
+                            changeset "sosusystem-frontend/**"
+                        }
+                        echo "Building Frontend.."
+                        dir("sosusystem-frontend"){
+                            sh"npm install"
+                            sh"npm run build"
+                        }
+                    }
                 }
             }
         }
