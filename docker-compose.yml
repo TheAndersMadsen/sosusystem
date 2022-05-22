@@ -1,13 +1,12 @@
 version: "3.9"
 
 services:
-  mongodb:
-    image: 'mongo:latest'
-    container_name: "mongodb"
+  mongo:
+    image: 'mongo:3.4.1'
     ports:
       - '27017:27017'
     volumes:
-      - 'mongodb:/data/db'
+      - 'mongo:/data/db'
   frontend:
     build:
       context: "sosusystem-frontend"
@@ -25,6 +24,9 @@ services:
     ports:
       - "${API_PORT}:80"
     depends_on:
-      - mongodb
+      - mongo
     volumes:
       - /node_modules
+      
+volumes:
+  mongo:
