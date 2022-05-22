@@ -5,7 +5,7 @@ services:
   web:
   
     build:
-      context: "Web"
+      context: "sosusystem-frontend"
     image: "localhost:7002/weather-web:${IMAGE_TAG}"
     container_name: "${WEB_CONT_NAME}"
     ports:
