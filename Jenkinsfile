@@ -30,6 +30,27 @@ pipeline {
                         }
                     }
                 }
+
+                stage('Build Backend') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
+                    steps {
+                        echo "Building Backend.."
+                        dir("sosusystem-backend"){
+                            sh"npm install"
+                            sh"npm run build"
+                        }
+                        sh "docker-compose -f docker-compose.yml --env-file config/test.env build backend"
+                    }
+                    post{
+                        success{
+                            echo "Backend Built Successfully!"
+                        }
+                    }
+                }
             }
         }
         stage('Reset Test Environment') {
