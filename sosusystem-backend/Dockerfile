@@ -1,5 +1,4 @@
-
-FROM sosusystem/sosusystem-backend
+FROM node:16-alpine
 
 COPY dist/ .
 
