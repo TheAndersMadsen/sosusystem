@@ -50,4 +50,12 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            sh "Pipeline has ran successfully!"
+            withCredentials([string(credentialsId: 'DiscordWebhookURL', variable: 'WEBHOOK_URL')]) {
+                discordSend description: '', enableArtifactsList: true, footer: 'Jenkins Pipeline Build', image: '', link: 'env.BUILD_URL', result: '', scmWebUrl: '', showChangeset: true, thumbnail: 'https://nyuddannet.dk/images/dynamic/company/logo/121078', title: 'env.JOB_NAME', webhookURL: 'https://discord.com/api/webhooks/954004988013707334/-YGVFR1tMHesJqAWoPDf1oR-9f81WPC7CmL48L-60yh5dMNMUCs6D6DTm-gRe2SZJ_Pw'
+            }
+        }
+    }
 }
