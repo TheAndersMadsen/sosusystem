@@ -20,7 +20,7 @@ pipeline {
                         echo "Building Frontend.."
                         dir("sosusystem-frontend"){
                             sh"npm install"
-                            sh"npm run build
+                            sh"npm run build"
                         }
                         sh "docker-compose --env-file config/test-manual.env build frontend"
                     }
