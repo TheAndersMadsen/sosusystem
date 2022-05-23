@@ -2,6 +2,15 @@
 version: "3.9"
 
 services:
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
     frontend:
         ports:
           - "61002:80"
@@ -15,5 +24,7 @@ services:
         entrypoint: ["npm", "run", "start"]
         ports:
             - "61001:3006"
-            - "27017:27017"
-            
+        depends_on:
+          - mongo
+volumes:
+  mongo:
