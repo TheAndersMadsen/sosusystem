@@ -31,6 +31,11 @@ pipeline {
                     }
                 }
                 stage('Build Backend') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
                     steps {
                         echo "Building Backend.."
                         dir("sosusystem-backend"){
