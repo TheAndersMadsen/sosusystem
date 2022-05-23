@@ -17,6 +17,11 @@ pipeline {
                 }
             }
         }
+        stage("Performance tests") {
+            steps {
+                sh "k6 run -e BASE_URL=http://localhost:6002 tests/perf/load-test.js"
+            }
+        }
         stage('Delivering Builds To Docker Hub') {
             parallel {
 
