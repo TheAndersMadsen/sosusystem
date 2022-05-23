@@ -8,18 +8,6 @@ services:
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
-  mongo:
-      container_name: mongo
-      image: mongo
-      ports:
-          - '27017:27017'
-      volumes:
-          - ./data:/data/db
-      environment: 
-        - MONGODB_USER_NAME=admin
-        - MONGODB_USER_PASSWORD=adminExam2022
-        - MONGODB_DB_NAME=SOSU-Final-Release
-
   backend:
     build:
       context: "sosusystem-backend"
@@ -33,5 +21,3 @@ services:
       - MONGODB_DB_NAME=SOSU-Final-Release
     ports:
       - "${API_PORT}:80"
-    depends_on:
-      - mongo
