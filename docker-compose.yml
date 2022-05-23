@@ -15,7 +15,7 @@ services:
     container_name: "${API_CONT_NAME}"
     entrypoint: ["npm", "run", "start"]
     ports:
-      - "${API_PORT}:3000"
+      - "${API_PORT}:3006"
     dns_search: ''
     environment:
       MONGODB_USER_NAME: admin
