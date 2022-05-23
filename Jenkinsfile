@@ -61,7 +61,8 @@ pipeline {
         }
         stage("Push images to registry") {
             steps {
-                sh "docker-compose --env-file config/test-manual.env push"
+                sh "docker-compose --env-file config/test-manual.env push backend"
+                sh "docker-compose --env-file config/test-manual.env push frontend"
             }
             post{
                 success{
