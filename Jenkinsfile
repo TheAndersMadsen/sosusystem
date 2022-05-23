@@ -11,14 +11,14 @@ pipeline {
         stage("Build") {
             steps {
                 parallel(
-                    api: {
+                    backend: {
                         dir("sosusystem-backend"){
                             sh"npm install"
                             sh"npm run build"
                             sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                         }
                     },
-                    web: {
+                    frontend: {
                         dir("sosusystem-frontend"){
                             sh"npm install"
                             sh"npm run build"
