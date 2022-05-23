@@ -4,6 +4,12 @@ pipeline {
         run filter: 'SUCCESSFUL', name: 'PROMOTED_BUILD', projectName: 'SOSUSYSTEM'
     }
     stages {
+        stage("Setup test environment") {
+            steps {
+                sh "docker-compose --env-file config/test.env down"
+                sh "docker-compose --env-file config/test.env up -d"
+            }
+        }
         stage('Delivering Builds To Docker Hub') {
             parallel {
 
@@ -57,10 +63,10 @@ pipeline {
                 }
             }
         }
-        stage("Deploy to production") {
+        stage("Update production") {
             steps {
-                sh "docker run -d andersmadsen0/sosusystem-backend --env-file config/prod.env up -d"
-                sh "docker run -d andersmadsen0/sosusystem-frontend --env-file config/prod.env up -d"
+                sh "docker-compose --env-file environments/prod.env down"
+                sh "docker-compose --env-file environments/prod.env up -d"
             }
         }
     }
