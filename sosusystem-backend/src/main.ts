@@ -21,6 +21,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
   app.use(cookieParser());
   require('dotenv').config();
-  await app.listen(3006, '0.0.0.0');
+  await app.listen(3006);
 }
 bootstrap();
