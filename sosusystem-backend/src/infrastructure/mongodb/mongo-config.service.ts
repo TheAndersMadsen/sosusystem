@@ -13,7 +13,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
     const dbName: string = process.env.MONGODB_DB_NAME;
     console.log(`mongodb+srv://${userName}:${password}@sosu-db.qc7k5.mongodb.net/${dbName}?retryWrites=true&w=majority`)
     return {
-      uri: `mongodb+srv://${userName}:${password}@sosu-db.qc7k5.mongodb.net/${dbName}?retryWrites=true&w=majority&connectTimeoutMS=300000`,
+      uri: `mongodb://root:rootpassword@localhost:27017/db`,
     };
   }
 }
