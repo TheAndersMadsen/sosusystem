@@ -19,8 +19,10 @@ pipeline {
         }
         stage("Performance tests") {
             steps {
-                sh "k6 run -e BASE_URL=http://185.51.76.10:3006/api/subjects tests/perf/load-test.js"
-                sh "k6 run -e BASE_URL=http://185.51.76.10:3006/api/subjects tests/perf/stress-test.js"
+                echo "Starting Load Test.."
+                sh "k6 run -e BASE_URL=http://185.51.76.10:6001/api/subjects tests/perf/load-test.js"
+                echo "Starting Load Test.."
+                sh "k6 run -e BASE_URL=http://185.51.76.10:6001/api/subjects tests/perf/stress-test.js"
             }
         }
         stage('Delivering Builds To Docker Hub') {
