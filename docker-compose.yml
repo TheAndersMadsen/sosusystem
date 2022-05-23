@@ -24,7 +24,7 @@ services:
       JWT_SECRET_KEY: justALittleSecret
       JWT_EXPIRATION_TIME: 4300s
       MONGODB_HOST: 'db'
-      links:
+    links:
       - db
   db:
     image: mongo:3.6
