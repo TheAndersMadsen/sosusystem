@@ -7,10 +7,10 @@ services:
       environment:
         MONGO_INITDB_ROOT_USERNAME: root
         MONGO_INITDB_ROOT_PASSWORD: rootpassword
-    ports:
-      - 27017:27017
-    volumes:
-      - mongo:/data/db
+      ports:
+        - 27017:27017
+      volumes:
+        - mongo:/data/db
     frontend:
         ports:
           - "61002:80"
@@ -23,7 +23,7 @@ services:
           JWT_EXPIRATION_TIME: 4300s
         entrypoint: ["npm", "run", "start"]
         ports:
-            - "61001:3006"
+          - "61001:3006"
         depends_on:
           - mongo
 volumes:
