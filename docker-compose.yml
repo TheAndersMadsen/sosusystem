@@ -18,6 +18,7 @@ services:
       - "${API_PORT}:3006"
     dns_search: ''
     environment:
+      API_PORT: "${API_PORT}"
       MONGODB_USER_NAME: admin
       MONGODB_USER_PASSWORD: adminExam2022
       MONGODB_DB_NAME: SOSU-Final-Release
