@@ -13,7 +13,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
     const dbName: string = process.env.MONGODB_DB_NAME;
     console.log(userName, password, dbName)
     return {
-      uri: `mongodb://localhost`,
+      uri: `mongodb://185.51.76.10:27017`,
     };
   }
 }
