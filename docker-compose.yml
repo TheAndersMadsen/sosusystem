@@ -17,7 +17,7 @@ services:
     ports:
       - "${API_PORT}:80"
     depends_on:
-      - mongodb_container
+      - mongo_db
     environment:
       MONGODB_USER_NAME: admin
       MONGODB_USER_PASSWORD: adminExam2022
