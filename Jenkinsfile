@@ -12,6 +12,11 @@ pipeline {
             steps {
                 parallel(
                     web: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-frontend/**"
+                            }
+                        }
                         dir("sosusystem-frontend"){
                             sh"npm install"
                             sh"npm run build"
@@ -20,6 +25,11 @@ pipeline {
                         }
                     },
                     api: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-backend/**"
+                            }
+                        }
                         dir("sosusystem-backend"){
                             sh"npm install"
                             sh"npm run build"
