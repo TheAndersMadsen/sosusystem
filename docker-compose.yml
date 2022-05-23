@@ -18,6 +18,10 @@ services:
       - "${API_PORT}:80"
     depends_on:
       - mongodb_container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminExam2022
+      MONGO_INITDB_DATABASE: SOSU-Final-Release
 
   mongodb_container:
     image: mongo:latest
