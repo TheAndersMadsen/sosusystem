@@ -8,6 +8,8 @@ services:
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
+    networks:
+      - sosu-net
   backend:
     build:
       context: "sosusystem-backend"
