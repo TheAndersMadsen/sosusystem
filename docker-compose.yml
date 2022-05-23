@@ -24,15 +24,15 @@ services:
       MONGODB_DB_NAME: SOSU-Final-Release
       JWT_SECRET_KEY: justALittleSecret
       JWT_EXPIRATION_TIME: 4300s
-  mongodb_container:
-    image: mongo:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: adminExam2022
-      MONGO_INITDB_DATABASE: SOSU-Final-Release
+  mongo_db:
+    image: mongo
+    restart: always
+    container_name: mongo_container # Use this in the connection url
+    command: mongod -port 27017 --dbpath /data/db --replSet rs0
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - mongodb_data_container:/data/db
+      - mongo_storage:/data/db
+
 volumes:
-  mongodb_data_container:
+  mongo_storage:
