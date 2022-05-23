@@ -27,14 +27,5 @@ services:
       - /sosusystem-frontend/node_modules
     networks:
       - nesjs-network
-
-  mongodb:
-    image: mongo:5.0.0
-    container_name: server-mongodb
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=pass12345
-    volumes:
-      - mongodb-data:/data/db
 networks:
   nesjs-network:
