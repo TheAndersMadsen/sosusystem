@@ -15,10 +15,10 @@ services:
             - '27017:27017'
         volumes:
             - ./data:/data/db
-    environment: 
-      - MONGODB_USER_NAME=admin
-      - MONGODB_USER_PASSWORD=adminExam2022
-      - MONGODB_DB_NAME=SOSU-Final-Release
+        environment: 
+          - MONGODB_USER_NAME=admin
+          - MONGODB_USER_PASSWORD=adminExam2022
+          - MONGODB_DB_NAME=SOSU-Final-Release
 
   backend:
     build:
