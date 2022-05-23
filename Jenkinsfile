@@ -22,7 +22,7 @@ pipeline {
                             sh"npm install"
                             sh"npm run build"
                         }
-                        sh "docker-compose -f docker-compose.yml --env-file config/test.env build frontend"
+                        sh "docker-compose -f docker-compose.yml --env-file config/test-manual.env build frontend"
                     }
                     post{
                         success{
@@ -37,7 +37,7 @@ pipeline {
                             sh"npm install"
                             sh"npm run build"
                         }
-                        sh "docker-compose -f docker-compose.yml --env-file config/test.env build backend"
+                        sh "docker-compose -f docker-compose.yml --env-file config/test-manual.env build backend"
                     }
                     post{
                         success{
@@ -49,7 +49,7 @@ pipeline {
         }
         stage("Push images to registry") {
             steps {
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env push"
+                sh "docker-compose -f docker-compose.yml --env-file config/test-manual.env push"
             }
             post{
                 success{
