@@ -7,9 +7,9 @@ pipeline {
     
         stage('Reset Test Environment') {
             steps{
-                sh "docker-compose -f docker-compose.yml --env-file config/test-auto.env down"
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml down -d"
                 sh "docker system prune -f"
-                sh "docker-compose -f docker-compose.yml --env-file config/test-auto.env up -d"
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml up -d"
             }
             post{
                 success{
@@ -20,62 +20,9 @@ pipeline {
         stage("Performance tests") {
             steps {
                 echo "Starting Load Test.."
-                sh "k6 run -e BASE_URL=http://localhost:6002/api/subjects tests/perf/load-test.js"
+                sh "k6 run -e BASE_URL=http://localhost:61001/api/subjects tests/perf/load-test.js"
                 echo "Starting Load Test.."
-                sh "k6 run -e BASE_URL=http://localhost:6002/api/subjects tests/perf/stress-test.js"
-            }
-        }
-        stage('Delivering Builds To Docker Hub') {
-            parallel {
-
-                stage('Delivering Backend To Docker Hub') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-backend/**"
-                        }
-                    }
-                    steps {
-                        echo "Delivering Backend.."
-                        dir("sosusystem-backend"){
-                            echo 'Building Docker Image..'
-                            sh"docker build . -t andersmadsen0/sosusystem-backend"
-                            echo 'Logging into Docker Hub..'
-                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
-                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
-                            }
-                            sh"docker push andersmadsen0/sosusystem-backend"
-                        }
-                    }
-                    post{
-                        success{
-                            echo "Backend Delivered To Docker Hub!"
-                        }
-                    }
-                }
-                stage('Delivering Frontend To Docker Hub') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-frontend/**"
-                        }
-                    }
-                    steps {
-                        echo "Delivering Frontend.."
-                        dir("sosusystem-frontend"){
-                            echo 'Building Docker Image..'
-                            sh"docker build . -t andersmadsen0/sosusystem-frontend"
-                            echo 'Logging into Docker Hub..'
-                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
-                                sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
-                            }
-                            sh"docker push andersmadsen0/sosusystem-frontend"
-                        }
-                    }
-                    post{
-                        success{
-                            echo "Frontend Delivered To Docker Hub!"
-                        }
-                    }
-                }
+                sh "k6 run -e BASE_URL=http://localhost:61001/api/subjects tests/perf/stress-test.js"
             }
         }
         stage("Update production") {
