@@ -4,14 +4,14 @@ services:
   frontend:
     build:
       context: "sosusystem-frontend"
-    image: "${IMAGE_WEB}"
+    image: "localhost:7002/sosusystem-frontend:${TAG}"
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
   backend:
     build:
       context: "sosusystem-backend"
-    image: "${IMAGE_API}"
+    image: "localhost:7002/sosusystem-backend:${TAG}"
     container_name: "${API_CONT_NAME}"
     entrypoint: ["npm", "run", "start"]
     ports:
