@@ -52,29 +52,28 @@ pipeline {
                 }
             }
         }
-        stage("Setup manual test env") {
+        stage("Deliver") {
             steps {
-                sh "docker-compose -f docker-compose.yml --env-file config/test-manual.env down"
-                sh "docker system prune -f"
-                sh "docker-compose -f docker-compose.yml --env-file config/test-manual.env up -d"
+                parallel(
+                    web: {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                            sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                        }
+                    },
+                    api: {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                            
+                            sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                        }
+                    }
+                )
             }
         }
-        stage("Push images to registry") {
+        stage("Release to test") {
             steps {
-                sh "docker-compose --env-file config/test-manual.env push backend"
-                sh "docker-compose --env-file config/test-manual.env push frontend"
-            }
-            post{
-                success{
-                    echo "Images Pushed To Registry!"
-                }
-            }
-        }
-        stage("Release to production") {
-            steps {
-                build job: "SOSUSYSTEM-PROD", wait: false, parameters: [
-                    string(name: "TAG_NUMBER", value: env.BUILD_NUMBER)
-                ]
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml up -d"
             }
         }
     }
