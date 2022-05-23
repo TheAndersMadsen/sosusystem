@@ -4,10 +4,17 @@ pipeline {
         string 'TAG_NUMBER'
     }
     stages {
-        stage("Setup test environment") {
-            steps {
-                sh "docker-compose --env-file config/test-auto.env down"
-                sh "docker-compose --env-file config/test-auto.env up -d"
+    
+        stage('Reset Test Environment') {
+            steps{
+                sh "docker-compose -f docker-compose.yml --env-file config/test-auto.env down"
+                sh "docker system prune -f"
+                sh "docker-compose -f docker-compose.yml --env-file config/test-auto.env up -d"
+            }
+            post{
+                success{
+                    echo "Test Environemnt Ready!"
+                }
             }
         }
         stage('Delivering Builds To Docker Hub') {
