@@ -22,3 +22,12 @@ services:
       MONGODB_DB_NAME: SOSU-Final-Release
       JWT_SECRET_KEY: justALittleSecret
       JWT_EXPIRATION_TIME: 4300s
+      MONGODB_HOST: 'db'
+      links:
+      - db
+  db:
+    image: mongo:3.6
+    command: mongod --smallfiles --bind_ip_all
+    volumes:
+    - mongodb-data:/data/db
+
