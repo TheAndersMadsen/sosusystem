@@ -19,10 +19,9 @@ services:
     depends_on:
       - mongodb_container
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: adminExam2022
-      MONGO_INITDB_DATABASE: SOSU-Final-Release
-
+      MONGODB_USER_NAME: admin
+      MONGODB_USER_PASSWORD: adminExam2022
+      MONGODB_DB_NAME: SOSU-Final-Release
   mongodb_container:
     image: mongo:latest
     environment:
