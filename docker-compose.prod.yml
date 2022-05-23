@@ -1,1 +1,18 @@
 
+
+version: "3.9"
+
+services:
+    frontend:
+        ports:
+          - "62002:80"
+    backend:
+        environment:
+          MONGODB_USER_NAME: admin
+          MONGODB_USER_PASSWORD: adminExam2022
+          MONGODB_DB_NAME: SOSU-Final-Release
+          JWT_SECRET_KEY: justALittleSecret
+          JWT_EXPIRATION_TIME: 4300s
+        entrypoint: ["npm", "run", "start"]
+        ports:
+            - "62001:3006"
