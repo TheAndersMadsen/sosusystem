@@ -8,6 +8,15 @@ services:
     container_name: "${WEB_CONT_NAME}"
     ports:
       - "${WEB_PORT}:80"
+  mongo_db:
+    image: mongo
+    container_name: mongo_container # Use this in the connection url
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_storage:/data/db
+    networks: 
+      - container-network
   backend:
     build:
       context: "sosusystem-backend"
@@ -15,7 +24,7 @@ services:
     container_name: "${API_CONT_NAME}"
     entrypoint: ["npm", "run", "start"]
     ports:
-      - "${API_PORT}:5500"
+      - "${API_PORT}:3000"
     depends_on:
       - mongo_db
     environment:
@@ -26,17 +35,7 @@ services:
       JWT_EXPIRATION_TIME: 4300s
     networks: 
       - container-network
-  mongo_db:
-    image: mongo
-    restart: always
-    container_name: mongo_container # Use this in the connection url
-    command: mongod -port 27017 --dbpath /data/db --replSet rs0
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_storage:/data/db
-    networks: 
-      - container-network
+
 
 volumes:
   mongo_storage:
