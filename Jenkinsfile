@@ -32,14 +32,14 @@ pipeline {
         stage("Deliver") {
             steps {
                 parallel(
-                    api: {
+                    backend: {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             
                             sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                         }
                     },
-                    web: {
+                    frontend: {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
