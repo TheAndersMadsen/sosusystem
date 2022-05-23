@@ -14,7 +14,7 @@ pipeline {
                         }
                     }
                     steps {
-                        echo "Delivering Brontend.."
+                        echo "Delivering Backend.."
                         dir("sosusystem-backend"){
                             echo 'Building Docker Image..'
                             sh"docker build . -t andersmadsen0/sosusystem-backend"
