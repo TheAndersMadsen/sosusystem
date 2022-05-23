@@ -24,6 +24,8 @@ services:
       MONGODB_DB_NAME: SOSU-Final-Release
       JWT_SECRET_KEY: justALittleSecret
       JWT_EXPIRATION_TIME: 4300s
+    networks: 
+      - container-network
   mongo_db:
     image: mongo
     restart: always
@@ -33,6 +35,13 @@ services:
       - "27017:27017"
     volumes:
       - mongo_storage:/data/db
+    networks: 
+      - container-network
 
 volumes:
   mongo_storage:
+
+networks: 
+  container-network:
+    name: container-network
+    driver: bridge
