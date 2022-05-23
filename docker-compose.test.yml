@@ -15,3 +15,5 @@ services:
         entrypoint: ["npm", "run", "start"]
         ports:
             - "61001:3006"
+            - "27017:27017"
+            
