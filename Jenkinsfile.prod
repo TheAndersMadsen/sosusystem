@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string 'TAG_NUMBER'
+        string 'PROMOTE_BUILD'
     }
     stages {
     
