@@ -24,3 +24,9 @@ services:
       MONGODB_DB_NAME: SOSU-Final-Release
       JWT_SECRET_KEY: justALittleSecret
       JWT_EXPIRATION_TIME: 4300s
+    networks:
+      - sosu-net
+
+networks:
+  sosu-net:
+    driver: bridge
