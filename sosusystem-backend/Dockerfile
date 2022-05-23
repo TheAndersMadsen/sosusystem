@@ -1,5 +1,7 @@
-FROM node:14.2.0-slim
+FROM node:14.2.0-alpine
 
+RUN mkdir /app
 WORKDIR /app
-ADD package.json /app/package.json
-ADD . /app
+COPY package.json /app/
+COPY package-lock.json /app/
+ADD . /app/
