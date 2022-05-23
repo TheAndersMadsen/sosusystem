@@ -1,34 +1,9 @@
 version: "3.9"
 
 services:
-  frontend:
-    build:
-      context: "sosusystem-frontend"
-    image: "localhost:7002/sosusystem-frontend:${TAG}"
-    container_name: "${WEB_CONT_NAME}"
-    ports:
-      - "${WEB_PORT}:80"
-    networks:
-      - sosu-net
-  backend:
-    build:
-      context: "sosusystem-backend"
-    image: "localhost:7002/sosusystem-backend:${TAG}"
-    container_name: "${API_CONT_NAME}"
-    entrypoint: ["npm", "run", "start"]
-    ports:
-      - "${API_PORT}:3006"
-    dns_search: ''
-    environment:
-      API_PORT: "${API_PORT}"
-      MONGODB_USER_NAME: admin
-      MONGODB_USER_PASSWORD: adminExam2022
-      MONGODB_DB_NAME: SOSU-Final-Release
-      JWT_SECRET_KEY: justALittleSecret
-      JWT_EXPIRATION_TIME: 4300s
-    networks:
-      - sosu-net
-
-networks:
-  sosu-net:
-    driver: bridge
+    api:
+        image: andersmadsen0/sosusystem-backend:${BUILD_NUMBER}
+        restart: always
+    web:
+        image: andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}
+        restart: always
