@@ -22,11 +22,9 @@ services:
   mongodb_container:
     image: mongo:latest
     environment:
-      - MONGODB_USER_NAME=admin
-      - MONGODB_USER_PASSWORD=adminExam2022
-      - MONGODB_DB_NAME=SOSU-Final-Release
-      - JWT_SECRET_KEY=justALittleSecret
-      - JWT_EXPIRATION_TIME=4300s
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminExam2022
+      MONGO_INITDB_DATABASE: SOSU-Final-Release
     ports:
       - 27017:27017
     volumes:
