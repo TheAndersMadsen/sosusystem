@@ -14,4 +14,4 @@ services:
           JWT_EXPIRATION_TIME: 4300s
         entrypoint: ["npm", "run", "start"]
         ports:
-            - "61001:80"
+            - "61001:3006"
