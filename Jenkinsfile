@@ -23,7 +23,6 @@ pipeline {
                         dir("sosusystem-backend"){
                             sh"npm install"
                             sh"npm run build"
-                            sh "dotnet build"
                             sh "docker build . -t andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
                         }
                     }
