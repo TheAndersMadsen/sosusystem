@@ -66,7 +66,7 @@ pipeline {
         stage("Release to production") {
             steps {
                 build job: "SOSUSYSTEM-PROD", wait: false, parameters: [
-                    string(name: "TAG_NUMBER", value: env.BUILD_NUMBER)
+                    string(name: "TAG", value: env.BUILD_NUMBER)
                 ]
             }
         }
