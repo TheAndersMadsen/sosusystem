@@ -47,6 +47,12 @@ pipeline {
                 }
             }
         }
+        stage("Setup manual test env") {
+            steps {
+                sh "docker-compose --env-file config/test-manual.env down"
+                sh "docker-compose --env-file config/test-manual.env up -d"
+            }
+        }
         stage("Push images to registry") {
             steps {
                 sh "docker-compose --env-file config/test-manual.env push"
