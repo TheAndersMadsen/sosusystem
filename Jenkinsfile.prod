@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        run filter: 'SUCCESSFUL', name: 'TAG_NUMBER', projectName: 'SOSUSYSTEM'
+        run filter: 'SUCCESSFUL', name: 'TAG', projectName: 'SOSUSYSTEM'
     }
     stages {
         stage("Setup test environment") {
