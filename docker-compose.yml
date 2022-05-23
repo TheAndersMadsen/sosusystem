@@ -1,9 +1,9 @@
 version: "3.9"
 
 services:
-    api:
+    backend:
         image: andersmadsen0/sosusystem-backend:${BUILD_NUMBER}
         restart: always
-    web:
+    frontend:
         image: andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}
         restart: always
