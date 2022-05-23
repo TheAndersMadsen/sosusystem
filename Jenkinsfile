@@ -47,18 +47,6 @@ pipeline {
                 }
             }
         }
-        stage('Reset Test Environment') {
-            steps{
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env down"
-                sh "docker system prune -f"
-                sh "docker-compose -f docker-compose.yml --env-file config/test.env up -d"
-            }
-            post{
-                success{
-                    echo "Test Environemnt Ready!"
-                }
-            }
-        }
         stage("Push images to registry") {
             steps {
                 sh "docker-compose -f docker-compose.yml --env-file config/test.env push"
@@ -67,6 +55,13 @@ pipeline {
                 success{
                     echo "Images Pushed To Registry!"
                 }
+            }
+        }
+        stage("Release to production") {
+            steps {
+                build job: "SOSUSYSTEM - Deploy to production", wait: false, parameters: [
+                    string(name: "TAG_NUMBER", value: env.BUILD_NUMBER)
+                ]
             }
         }
     }
