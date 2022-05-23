@@ -12,5 +12,6 @@ services:
           MONGODB_DB_NAME: SOSU-Final-Release
           JWT_SECRET_KEY: justALittleSecret
           JWT_EXPIRATION_TIME: 4300s
+        entrypoint: ["npm", "run", "start"]
         ports:
             - "61001:80"
