@@ -16,6 +16,7 @@ services:
     entrypoint: ["npm", "run", "start"]
     ports:
       - "${API_PORT}:3000"
+    dns_search: ''
     environment:
       MONGODB_USER_NAME: admin
       MONGODB_USER_PASSWORD: adminExam2022
