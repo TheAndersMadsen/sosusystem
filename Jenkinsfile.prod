@@ -1,13 +1,13 @@
 pipeline {
     agent any
     parameters {
-        run filter: 'SUCCESSFUL', name: 'TAG', projectName: 'SOSUSYSTEM'
+        string 'TAG_NUMBER'
     }
     stages {
         stage("Setup test environment") {
             steps {
-                sh "docker-compose --env-file config/test.env down"
-                sh "docker-compose --env-file config/test.env up -d"
+                sh "docker-compose --env-file config/test-auto.env down"
+                sh "docker-compose --env-file config/test-auto.env up -d"
             }
         }
         stage('Delivering Builds To Docker Hub') {
