@@ -27,8 +27,7 @@ pipeline {
         }
         stage("Update production") {
             steps {
-                sh "docker-compose --env-file config/prod.env down"
-                sh "docker-compose --env-file config/prod.env up -d"
+                sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml up -d"
             }
         }
     }
