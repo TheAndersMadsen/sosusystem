@@ -11,6 +11,18 @@ pipeline {
         stage("Build") {
             steps {
                 parallel(
+                    api: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-backend/**"
+                            }
+                        }
+                        dir("sosusystem-backend"){
+                            sh"npm install"
+                            sh"npm run build"
+                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                        }
+                    },
                     web: {
                         when{
                             anyOf{
@@ -23,18 +35,6 @@ pipeline {
                             sh "docker build . -t andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
                             
                         }
-                    },
-                    api: {
-                        when{
-                            anyOf{
-                                changeset "sosusystem-backend/**"
-                            }
-                        }
-                        dir("sosusystem-backend"){
-                            sh"npm install"
-                            sh"npm run build"
-                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
-                        }
                     }
                 )
             }
@@ -42,17 +42,27 @@ pipeline {
         stage("Deliver") {
             steps {
                 parallel(
-                    web: {
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-                            sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
-                        }
-                    },
                     api: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-backend/**"
+                            }
+                        }
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             
                             sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                        }
+                    },
+                    web: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-frontend/**"
+                            }
+                        }
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                            sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
                         }
                     }
                 )
