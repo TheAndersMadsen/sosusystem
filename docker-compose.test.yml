@@ -11,6 +11,8 @@ services:
         - 27017:27017
       volumes:
         - mongo:/data/db
+      networks:
+        - sosu-network
     frontend:
         ports:
           - "61002:80"
@@ -26,5 +28,12 @@ services:
           - "61001:3006"
         depends_on:
           - mongo
+        networks:
+        - sosu-network
+          
+networks:
+  sosu-network:
+    driver: bridge
+
 volumes:
   mongo:
