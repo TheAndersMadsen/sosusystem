@@ -4,16 +4,17 @@ services:
     mongo:
       image: mongo
       ports:
-        - 27017:27017
+        - "${DB_PORT}:27017"
       volumes:
         - mongo:/data/db
       networks:
         - sosu-prod-network
     frontend:
         ports:
-          - "62002:80"
+          - "${WEB_PORT}:80"
     backend:
         environment:
+          MONGODB_PORT: "${DB_PORT}"
           MONGODB_USER_NAME: admin
           MONGODB_USER_PASSWORD: adminExam2022
           MONGODB_DB_NAME: SOSU-Final-Release
