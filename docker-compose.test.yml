@@ -16,9 +16,6 @@ services:
     backend:
         environment:
           MONGODB_PORT: "${DB_PORT}"
-          MONGODB_USER_NAME: admin
-          MONGODB_USER_PASSWORD: adminExam2022
-          MONGODB_DB_NAME: SOSU-Final-Release
           JWT_SECRET_KEY: justALittleSecret
           JWT_EXPIRATION_TIME: 4300s
         entrypoint: ["npm", "run", "start"]
