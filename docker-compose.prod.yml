@@ -1,8 +1,14 @@
-
-
 version: "3.9"
 
 services:
+    mongo:
+      image: mongo
+      ports:
+        - 27017:27017
+      volumes:
+        - mongo:/data/db
+      networks:
+        - sosu-network
     frontend:
         ports:
           - "62002:80"
@@ -15,4 +21,15 @@ services:
           JWT_EXPIRATION_TIME: 4300s
         entrypoint: ["npm", "run", "start"]
         ports:
-            - "62001:3006"
+          - "62001:3006"
+        depends_on:
+          - mongo
+        networks:
+        - sosu-prod-network
+          
+networks:
+  sosu-prod-network:
+    driver: bridge
+
+volumes:
+  mongo:
