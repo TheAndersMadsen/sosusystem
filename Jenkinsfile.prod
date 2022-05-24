@@ -3,6 +3,10 @@ pipeline {
     parameters {
         string 'TAG_NUMBER'
     }
+    environment {
+        TIMESTAMP = sh(script: "date +%s", returnStdout: true).trim()
+        SCREENSHOT_PATH = "screenshots/${TIMESTAMP}"
+    }
     stages {
         stage("Setup test environment") {
             steps {
