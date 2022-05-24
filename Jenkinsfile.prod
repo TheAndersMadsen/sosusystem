@@ -7,6 +7,9 @@ pipeline {
         stage("Performance tests") {
             steps {
                 echo "Starting Load Test.."
+                sh "k6 run -e BASE_URL=http://localhost:61002/api/subjects tests/perf/load-test.js"
+                echo "Starting Load Test.."
+                sh "k6 run -e BASE_URL=http://localhost:61002/api/subjects tests/perf/stress-test.js"
             }
         }
         stage("Update production") {
