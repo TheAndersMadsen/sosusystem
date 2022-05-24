@@ -5,16 +5,17 @@ services:
     mongo:
       image: mongo
       ports:
-        - 27017:27017
+        - "${DB_PORT}:27017"
       volumes:
         - mongo:/data/db
       networks:
         - sosu-network
     frontend:
         ports:
-          - "61002:80"
+          - "${WEB_PORT}:80"
     backend:
         environment:
+          MONGODB_PORT: "${DB_PORT}"
           MONGODB_USER_NAME: admin
           MONGODB_USER_PASSWORD: adminExam2022
           MONGODB_DB_NAME: SOSU-Final-Release
@@ -22,7 +23,7 @@ services:
           JWT_EXPIRATION_TIME: 4300s
         entrypoint: ["npm", "run", "start"]
         ports:
-          - "61001:3006"
+          - "${API_PORT}:3006"
         depends_on:
           - mongo
         networks:
