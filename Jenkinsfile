@@ -32,7 +32,7 @@ pipeline {
                             changeset "sosusystem-frontend/**"
                         }
                     }
-                    steps 
+                    steps {
                         dir("sosusystem-frontend"){
                             sh"npm install"
                             sh"npm run build"
@@ -78,5 +78,6 @@ pipeline {
             }
         }
     }
+}
 }
 
