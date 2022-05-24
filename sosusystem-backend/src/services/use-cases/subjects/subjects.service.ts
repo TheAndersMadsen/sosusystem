@@ -299,7 +299,7 @@ export class SubjectsService {
             subTitle: subTitle,
             comment: '',
             reason: '',
-            relevant: '',
+            relevant: null,
           });
         // Add each item to allItems
         allItems.push(item);
@@ -333,8 +333,8 @@ export class SubjectsService {
           await this.dataServices._functionAbilityItemDocumentModel.create({
             _id: mongoose.Types.ObjectId(),
             subTitle: subTitle,
-            currentLevel: '',
-            expectedLevel: '',
+            currentLevel: null,
+            expectedLevel: null,
             execution: '',
             meaningOfExecution: '',
             subjectWish: '',
