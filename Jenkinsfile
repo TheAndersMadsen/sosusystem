@@ -74,11 +74,21 @@ pipeline {
             }
         }
         stage("Release To Test Environment") {
+            when{
+                anyOf{
+                    changeset "/**"
+                }
+            }
             steps {
                 sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
             }
         }
         stage("Release To Production") {
+            when{
+                anyOf{
+                    changeset "/**"
+                }
+            }
             steps {
                 build job: "SOSUSYSTEM-PROD", wait: false, parameters: [
                     string(name: "TAG_NUMBER", value: env.BUILD_NUMBER)
