@@ -46,11 +46,6 @@ pipeline {
         stage('Deliver To Docker Hub') {
             parallel {
                 stage('Deliver Backend To Docker Hub') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-backend/**"
-                        }
-                    }
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
@@ -59,11 +54,6 @@ pipeline {
                     }
                 }
                 stage('Deliver Frontend To Docker Hub') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-frontend/**"
-                        }
-                    }
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
