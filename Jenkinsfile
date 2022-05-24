@@ -11,18 +11,16 @@ pipeline {
         stage("Build") {
             steps {
                 parallel(
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
                     backend: {
-                        steps {
-                            when{
-                                anyOf{
-                                    changeset "sosusystem-backend/**"
-                                }
-                            }
-                            dir("sosusystem-backend"){
-                                sh"npm install"
-                                sh"npm run build"
-                                sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
-                            }
+                        dir("sosusystem-backend"){
+                            sh"npm install"
+                            sh"npm run build"
+                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                         }
                     },
                     frontend: {
