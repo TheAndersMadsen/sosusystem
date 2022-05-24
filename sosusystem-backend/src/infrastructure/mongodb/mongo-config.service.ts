@@ -8,11 +8,9 @@ require('dotenv').config();
 @Injectable()
 export class MongooseConfigService implements MongooseOptionsFactory {
   createMongooseOptions(): MongooseModuleOptions {
-    const userName: string = process.env.MONGODB_USER_NAME;
-    const password: string = process.env.MONGODB_USER_PASSWORD;
-    const dbName: string = process.env.MONGODB_DB_NAME;
+    const dbPort: string = process.env.MONGODB_PORT;
     return {
-      uri: `mongodb+srv://${userName}:${password}@sosu-db.qc7k5.mongodb.net/${dbName}?retryWrites=true&w=majority`,
+      uri: `mongodb://mongo:${dbPort}/db`,
     };
   }
 }

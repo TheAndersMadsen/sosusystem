@@ -1,0 +1,27 @@
+<!---- Creating the subject navigation modal ---->
+<div class="modal" id="subNavModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> {{selectedFirstName}} {{selectedLastName}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <button (click)="onCLickGI(selectedId)" type="btn-primary" data-bs-dismiss="modal" class="btn btn-primary btn-block">Generelle oplysninger</button>
+                    </div>
+                    <div class="mb-3">
+                        <button routerLink="../health-conditions" type="submit"  data-bs-dismiss="modal" class="btn btn-primary btn-block">Helbredstilstsande</button>
+                    </div>
+                    <div class="mb-3">
+                        <button routerLink="../function-abilities" type="submit" data-bs-dismiss="modal" class="btn btn-primary btn-block">Funktionsevnetilstande</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger btn-block" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

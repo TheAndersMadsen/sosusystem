@@ -6,49 +6,64 @@ pipeline {
     triggers {
         pollSCM "*/5 * * * *"
     }
-    environment {
-        dockerhub=credentials('dockerhub')
-    }
 
-    stages{
-        stage('Building Project - [SOSUSYSTEM-FRONTEND]') {
-            steps{
-                dir("sosusystem-frontend"){
-                    sh"npm install"
-                    sh"npm run build"
-                }
-            }
-        }
-        stage('Delivering Build To Docker Hub - [SOSUSYSTEM-FRONTEND]') {
-            steps{
-                dir("sosusystem-frontend"){
-                    echo 'Building Docker Image..'
-                    sh"docker build . -t andersmadsen0/sosusystem-frontend"
-               
-                    echo 'Logging into Docker Hub..'
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
-                        sh 'docker login -u $HUB_USER -p $HUB_TOKEN'
+    stages{        
+        stage('Building Stage..') {
+            parallel {
+                stage('Build Backend') {
+                    steps {
+                        echo "Building Backend.."
+                        dir("sosusystem-backend"){
+                            sh"npm install"
+                            sh"npm run build"
+                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                            
+                        }
                     }
-                    sh"docker push andersmadsen0/sosusystem-frontend"
                 }
-                
-            }
-        }
-        stage('reset containers') {
-            steps{
-                script{
-                    try{
-                        sh "docker-compose --env-file config/test.env down"
+                stage('Build Frontend') {
+                    steps {
+                        dir("sosusystem-frontend"){
+                            sh"npm install"
+                            sh"npm run build"
+                            sh "docker build . -t andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                        }
                     }
-                    finally {}
                 }
-            }
-        }
-        stage('deployment') {
-            steps{
-                sh "docker-compose --env-file config/test.env up -d"
             }
         }
 
+        stage('Deliver To Docker Hub') {
+            parallel {
+                stage('Deliver Backend To Docker Hub') {
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                            sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                        }
+                    }
+                }
+                stage('Deliver Frontend To Docker Hub') {
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                            sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                        }
+                    }
+                }
+            }
+        }
+        stage("Release To Test Environment") {
+            steps {
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
+            }
+        }
+        stage("Release To Production") {
+            steps {
+                build job: "SOSUSYSTEM-PROD", wait: false, parameters: [
+                    string(name: "TAG_NUMBER", value: env.BUILD_NUMBER)
+                ]
+            }
+        }
     }
 }
