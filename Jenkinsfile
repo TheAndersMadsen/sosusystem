@@ -11,11 +11,6 @@ pipeline {
         stage('Building Stage..') {
             parallel {
                 stage('Build Backend') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-backend/**"
-                        }
-                    }
                     steps {
                         echo "Building Backend.."
                         dir("sosusystem-backend"){
@@ -27,11 +22,6 @@ pipeline {
                     }
                 }
                 stage('Build Frontend') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-frontend/**"
-                        }
-                    }
                     steps {
                         dir("sosusystem-frontend"){
                             sh"npm install"
@@ -64,11 +54,6 @@ pipeline {
             }
         }
         stage("Release To Test Environment") {
-            when{
-                anyOf{
-                    changeset "**"
-                }
-            }
             steps {
                 sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
             }
