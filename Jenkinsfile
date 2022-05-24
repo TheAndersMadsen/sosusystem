@@ -50,7 +50,7 @@ pipeline {
         }
         stage("Release to test") {
             steps {
-                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml up -d"
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
             }
         }
         stage("Release to production") {
