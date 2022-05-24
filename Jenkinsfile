@@ -46,6 +46,7 @@ pipeline {
                     }
                 }
             }
+        }
         stage("Deliver To Docker Hub") {
             steps {
                 parallel(
@@ -79,5 +80,3 @@ pipeline {
         }
     }
 }
-}
-
