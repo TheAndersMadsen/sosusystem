@@ -4,6 +4,12 @@ pipeline {
         string 'TAG_NUMBER'
     }
     stages {
+        stage("Setup test environment") {
+            steps {
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env down"
+                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
+            }
+        }
         stage("Performance tests") {
             steps {
                 echo "Starting Load Test.."
