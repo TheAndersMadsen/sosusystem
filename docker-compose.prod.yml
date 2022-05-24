@@ -29,6 +29,5 @@ services:
 networks:
   sosu-prod-network:
     driver: bridge
-
 volumes:
-  mongo:
+  mongo-prod:
