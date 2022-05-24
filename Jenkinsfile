@@ -12,6 +12,11 @@ pipeline {
             steps {
                 parallel(
                     backend: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-backend/**"
+                            }
+                        }
                         dir("sosusystem-backend"){
                             sh"npm install"
                             sh"npm run build"
@@ -19,6 +24,11 @@ pipeline {
                         }
                     },
                     frontend: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-frontend/**"
+                            }
+                        }
                         dir("sosusystem-frontend"){
                             sh"npm install"
                             sh"npm run build"
@@ -33,6 +43,11 @@ pipeline {
             steps {
                 parallel(
                     backend: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-backend/**"
+                            }
+                        }
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             
@@ -40,6 +55,11 @@ pipeline {
                         }
                     },
                     frontend: {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-frontend/**"
+                            }
+                        }
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
