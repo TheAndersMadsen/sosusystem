@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CitizenNavModalComponent } from './citizen-nav-modal.component';
+import { GeneralInfoComponent } from './general-info.component';
 
-describe('CitizenNavModalComponent', () => {
-  let component: CitizenNavModalComponent;
-  let fixture: ComponentFixture<CitizenNavModalComponent>;
+describe('GeneralInfoComponent', () => {
+  let component: GeneralInfoComponent;
+  let fixture: ComponentFixture<GeneralInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CitizenNavModalComponent ]
+      declarations: [ GeneralInfoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CitizenNavModalComponent);
+    fixture = TestBed.createComponent(GeneralInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
