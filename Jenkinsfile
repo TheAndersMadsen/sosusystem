@@ -51,10 +51,11 @@ pipeline {
                                 changeset "sosusystem-backend/**"
                             }
                         }
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-                            
-                            sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                        steps {
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                                sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                                sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                            }
                         }
                     }
                     stage('Deliver Frontend To Docker Hub') {
@@ -63,9 +64,11 @@ pipeline {
                                 changeset "sosusystem-frontend/**"
                             }
                         }
-                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                            sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
-                            sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                        steps {
+                            withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                                sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                                sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                            }
                         }
                     }
                 }
