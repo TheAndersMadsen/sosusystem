@@ -2,8 +2,8 @@ version: "3.9"
 
 services:
     backend:
-        image: andersmadsen0/sosusystem-backend:${BUILD_NUMBER}
+        image: andersmadsen0/sosusystem-backend:${TAG}
         restart: always
     frontend:
-        image: andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}
+        image: andersmadsen0/sosusystem-frontend:${TAG}
         restart: always
