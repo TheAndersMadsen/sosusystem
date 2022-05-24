@@ -6,7 +6,8 @@ services:
       ports:
         - "${DB_PORT}:27017"
       volumes:
-        - mongo:/data/prod
+        - mongo-prod:/data/db
+        
       networks:
         - sosu-prod-network
     frontend:
