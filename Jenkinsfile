@@ -7,34 +7,47 @@ pipeline {
         pollSCM "*/5 * * * *"
     }
 
-    stages{
-        stage("Build") {
-            steps {
-                parallel(
-                    when{
-                        anyOf{
-                            changeset "sosusystem-backend/**"
-                        }
-                    }
-                    backend: {
+    stages{        
+        stage('Building Stage..') {
+            parallel {
+                stage('Build Backend') {
+                    steps {
+                        echo "Building Backend.."
                         dir("sosusystem-backend"){
-                            sh"npm install"
-                            sh"npm run build"
-                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
-                        }
-                    },
-                    frontend: {
-                        dir("sosusystem-frontend"){
                             sh"npm install"
                             sh"npm run build"
                             sh "docker build . -t andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
                             
                         }
                     }
-                )
+                    post{
+                        success{
+                            echo "Backend Built Successfully!"
+                        }
+                    }
+                }
+                stage('Build Frontend') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-frontend/**"
+                        }
+                    }
+                    steps 
+                        dir("sosusystem-frontend"){
+                            sh"npm install"
+                            sh"npm run build"
+                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                        }
+                    }
+                    post{
+                        success{
+                            echo "Frontend Built Successfully!"
+                        }
+                    }
+                }
             }
         }
-        stage("Deliver") {
+        stage("Deliver To Docker Hub") {
             steps {
                 parallel(
                     backend: {
@@ -53,12 +66,12 @@ pipeline {
                 )
             }
         }
-        stage("Release to test") {
+        stage("Release To Test Environment") {
             steps {
                 sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
             }
         }
-        stage("Release to production") {
+        stage("Release To Production") {
             steps {
                 build job: "SOSUSYSTEM-PROD", wait: false, parameters: [
                     string(name: "TAG_NUMBER", value: env.BUILD_NUMBER)
