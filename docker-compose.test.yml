@@ -7,7 +7,7 @@ services:
       ports:
         - "${DB_PORT}:27017"
       volumes:
-        - mongo:/data/db
+        - mongo:/data/test
       networks:
         - sosu-network
     frontend:
@@ -15,7 +15,6 @@ services:
           - "${WEB_PORT}:80"
     backend:
         environment:
-          MONGODB_NAME: "${DB_NAME}"
           MONGODB_PORT: "${DB_PORT}"
           JWT_SECRET_KEY: justALittleSecret
           JWT_EXPIRATION_TIME: 4300s
