@@ -8,7 +8,7 @@ services:
       volumes:
         - mongo:/data/db
       networks:
-        - sosu-network
+        - sosu-prod-network
     frontend:
         ports:
           - "62002:80"
