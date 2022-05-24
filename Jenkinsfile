@@ -25,11 +25,6 @@ pipeline {
                             
                         }
                     }
-                    post{
-                        success{
-                            echo "Backend Built Successfully!"
-                        }
-                    }
                 }
                 stage('Build Frontend') {
                     when{
@@ -44,31 +39,36 @@ pipeline {
                             sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                         }
                     }
-                    post{
-                        success{
-                            echo "Frontend Built Successfully!"
-                        }
-                    }
                 }
             }
         }
         stage("Deliver To Docker Hub") {
             steps {
-                parallel(
-                    backend: {
+                parallel {
+                    stage('Deliver Backend To Docker Hub') {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-backend/**"
+                            }
+                        }
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             
                             sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                         }
                     },
-                    frontend: {
+                    stage('Deliver Frontend To Docker Hub') {
+                        when{
+                            anyOf{
+                                changeset "sosusystem-frontend/**"
+                            }
+                        }
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                             sh"docker push andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
                         }
                     }
-                )
+                }
             }
         }
         stage("Release To Test Environment") {
