@@ -11,11 +11,6 @@ pipeline {
         stage('Building Stage..') {
             parallel {
                 stage('Build Backend') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-backend/**"
-                        }
-                    }
                     steps {
                         echo "Building Backend.."
                         dir("sosusystem-backend"){
@@ -27,11 +22,6 @@ pipeline {
                     }
                 }
                 stage('Build Frontend') {
-                    when{
-                        anyOf{
-                            changeset "sosusystem-frontend/**"
-                        }
-                    }
                     steps {
                         dir("sosusystem-frontend"){
                             sh"npm install"
