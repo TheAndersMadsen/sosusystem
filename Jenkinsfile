@@ -21,7 +21,7 @@ pipeline {
                         dir("sosusystem-backend"){
                             sh"npm install"
                             sh"npm run build"
-                            sh "docker build . -t andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
+                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                             
                         }
                     }
@@ -36,7 +36,7 @@ pipeline {
                         dir("sosusystem-frontend"){
                             sh"npm install"
                             sh"npm run build"
-                            sh "docker build . -t andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
+                            sh "docker build . -t andersmadsen0/sosusystem-frontend:${BUILD_NUMBER}"
                         }
                     }
                 }
