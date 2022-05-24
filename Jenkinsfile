@@ -56,7 +56,7 @@ pipeline {
                             
                             sh"docker push andersmadsen0/sosusystem-backend:${BUILD_NUMBER}"
                         }
-                    },
+                    }
                     stage('Deliver Frontend To Docker Hub') {
                         when{
                             anyOf{
