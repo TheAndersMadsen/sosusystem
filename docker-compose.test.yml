@@ -26,5 +26,7 @@ services:
           - "61001:3006"
         depends_on:
           - mongo
+        volumes:
+          - .:/app
 volumes:
   mongo:
