@@ -11,6 +11,11 @@ pipeline {
         stage('Building Stage..') {
             parallel {
                 stage('Build Backend') {
+                    when{
+                        anyOf{
+                            changeset "sosusystem-backend/**"
+                        }
+                    }
                     steps {
                         echo "Building Backend.."
                         dir("sosusystem-backend"){
