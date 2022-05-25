@@ -124,13 +124,6 @@ export class SubjectsService {
     return healthCondition;
   }
 
-  async findAllHealthConditionItems(
-    subjectId: string,
-    healthConditionId: string,
-  ): Promise<HealthConditionItem[]> {
-    return await this.getValidSubject(subjectId).then(async () => await this.getValidHealthCondition(healthConditionId)).then(h => h.healthConditionItems)
-  }
-
   async findOneHealthConditionItem(
     subjectId: string,
     healthConditionId: string,
@@ -160,13 +153,6 @@ export class SubjectsService {
     return await this.getValidSubject(subjectId).then(
       async () => await this.getValidFunctionAbility(functionAbilityId),
     );
-  }
-
-  async findAllFunctionAbilityItems(
-    subjectId: string,
-    functionAbilityId: string,
-  ): Promise<FunctionAbilityItem[]> {
-    return await this.getValidSubject(subjectId).then(async () => await this.getValidFunctionAbility(functionAbilityId)).then(f => f.functionAbilityItems)
   }
 
   async findOneFunctionAbilityItem(
@@ -274,7 +260,7 @@ export class SubjectsService {
   /* Helper Methods */
   /* Generates all basic information
    * Note: We are generating equal titles and subTitles for each subject,
-   * these titles and subTitles could be stored smarter! - we do not need them
+   * these titles and subTitles could be stored smarter!! - we do not need them
    * for each subject as they are all identical */
 
   async createGeneralInformation(): Promise<GeneralInfo[]> {
@@ -551,5 +537,4 @@ export class SubjectsService {
   //         ]),
   //     },
   //   ]),
-
 }
