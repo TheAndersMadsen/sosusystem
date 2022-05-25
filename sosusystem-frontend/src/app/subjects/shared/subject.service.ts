@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 import {SubjectDto} from "./subject.dto";
 import {GeneralDto} from "./general.dto";
 import {HealthDto} from "./health.dto";
+import {HealthConditionItemDto} from "./healthconditionitem.dto";
 
 
 @Injectable({
@@ -33,6 +34,10 @@ export class SubjectService {
 
   updateSubject(subjectId: string, subjectDto: SubjectDto): Observable<SubjectDto> {
     return this._http.patch<SubjectDto>(environment.api + '/subjects/' + subjectId, subjectDto);
+  }
+
+  updateHcItem(subjectId: string, hcId: string, hcItemId: string, healthItemDto: HealthConditionItemDto ) {
+    return this._http.patch(environment.api + '/subjects/' + subjectId + '/health-conditions/' + hcId + '/' + hcItemId,healthItemDto)
   }
 
   updateSubjectGeneralInformation(subjectId: string, generalInformationId: string, generalDto: GeneralDto): Observable<GeneralDto> {

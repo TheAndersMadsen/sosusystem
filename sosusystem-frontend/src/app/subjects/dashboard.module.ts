@@ -8,8 +8,8 @@ import { HealthConditionsComponent } from './health-conditions/health-conditions
 import { NavModalComponent } from './nav-modal/nav-modal.component';
 import {FooterComponent} from "../footer/footer.component";
 import {NavBarComponent} from "../nav-bar/nav-bar.component";
-import {SubcategoryModalComponentHealth} from "../subcategory-modal-health/subcategory-modal.component-health";
-import {SubcategoryModalFunctionComponent} from "../subcategory-modal-function/subcategory-modal-function.component";
+import {SubcategoryModalComponentHealth} from "./subcategory-modal-health/subcategory-modal.component-health";
+import {SubcategoryModalFunctionComponent} from "./subcategory-modal-function/subcategory-modal-function.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {ReactiveFormsModule} from "@angular/forms";
 

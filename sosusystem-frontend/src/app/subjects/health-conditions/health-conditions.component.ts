@@ -12,7 +12,7 @@ import {Observable} from "rxjs";
 })
 export class HealthConditionsComponent implements OnInit {
 
-  private selectedId: string
+  selectedId: string
   subject : SubjectDto
   health: any
   hcId : string
@@ -28,6 +28,7 @@ export class HealthConditionsComponent implements OnInit {
       this.subject = subjectResult
       this._service.getAllHealth(this.selectedId).subscribe((healthResult) => {
         this.health = healthResult
+
       })
     })
     console.log(this.health)  /// undefined
