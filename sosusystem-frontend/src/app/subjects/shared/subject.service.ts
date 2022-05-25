@@ -7,6 +7,7 @@ import {SubjectDto} from "./subject.dto";
 import {GeneralDto} from "./general.dto";
 import {HealthDto} from "./health.dto";
 import {HealthConditionItemDto} from "./healthconditionitem.dto";
+import {FunctionDto} from "./function.dto";
 
 
 @Injectable({
@@ -28,6 +29,11 @@ export class SubjectService {
   getAllHealth(subjectId : string): Observable<HealthDto>{
     return this._http.get<HealthDto>(environment.api + '/subjects/' + subjectId + '/health-conditions')
   }
+
+  getAllFunction(subjectId: string): Observable<FunctionDto> {
+    return this._http.get<FunctionDto>(environment.api + '/subjects/' + subjectId + '/function-abilities')
+  }
+
   getAllHealthItems(subjectId: string, healthId: string) {
     return this._http.get<HealthDto>(environment.api + '/subjects/' + subjectId + '/health-conditions/' + healthId)
   }

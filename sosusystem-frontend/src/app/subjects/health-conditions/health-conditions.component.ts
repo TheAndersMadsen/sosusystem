@@ -15,6 +15,7 @@ export class HealthConditionsComponent implements OnInit {
   selectedId: string
   subject : SubjectDto
   health: any
+  healthItem: any
   hcId : string
   title: string;
 
@@ -38,8 +39,12 @@ export class HealthConditionsComponent implements OnInit {
   onClickItem(hcId : string, title : string) {
     this.hcId = hcId
     this.title = title
+    this._service.getAllHealthItems(this.selectedId,this.hcId).subscribe((healthItemResult) => {
+      this.healthItem = healthItemResult
+    })
     console.log(this.hcId)
     console.log(this.title)
+
 
   }
 

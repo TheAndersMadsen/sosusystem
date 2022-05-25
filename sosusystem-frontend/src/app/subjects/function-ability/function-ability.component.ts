@@ -12,6 +12,7 @@ export class FunctionAbilityComponent implements OnInit {
 
   private selectedId: string
   subject : SubjectDto
+  function : any
 
   constructor(private _service: SubjectService, private _route: ActivatedRoute) { }
 
@@ -20,9 +21,12 @@ export class FunctionAbilityComponent implements OnInit {
     console.log(this.selectedId,'test')
     this._service.getSubjectById(this.selectedId).subscribe((result) => {
       this.subject = result
-
+      this._service.getAllFunction(this.selectedId).subscribe((functionResult) =>
+      this.function = functionResult)
     })
     console.log()  /// undefined
   }
+
+
 
 }

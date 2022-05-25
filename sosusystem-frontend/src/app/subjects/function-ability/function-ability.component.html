@@ -10,179 +10,29 @@
     </div>
     <!---- Create a container and card for collapse button view ---->
     <div class="container my-2" style="padding-bottom: 10%">
-        <div id="accordion">
+        <div id="accordion1"  *ngFor="let function of function">
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="john">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Funktionsniveau
+                        <button class="btn btn-link" data-bs-toggle="#collapse" data-bs-target="luk1"
+                                aria-expanded="true" aria-controls="luk1">
+                            {{function.title}}
                         </button>
                     </h5>
                 </div>
+                <div class="collapse show" aria-labelledby="john" data-bs-parent="accordion1">
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-
+                    <div class="row" *ngFor="let items of function.functionAbilityItems">
+                        <button class="btn btn-link" style="color: #487288" data-bs-toggle="modal"
+                                data-bs-target="#subcatFunctionModal">{{items.subTitle}}</button>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Bevægeapparat
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Ernæring
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="row">
-                        <button class="btn btn-link" style="background: darkgreen" data-bs-toggle="modal" data-bs-target="#subcatFunctionModal">Problemer med væskeindtag</button>
-                        <button class="btn btn-link" style="background: #ff7a1d" data-bs-toggle="modal" data-bs-target="#subcatFunctionModal">Problemer med fødeindtag</button>
-                        <button class="btn btn-link" style="background: grey" data-bs-toggle="modal" data-bs-target="#subcatFunctionModal">Uhensigtsmæssig vægtændring</button>
-                        <button class="btn btn-link" style="background: #ff7a1d" data-bs-toggle="modal" data-bs-target="#subcatFunctionModal">Problemer med overvægt</button>
-                        <button class="btn btn-link" style="background: darkred" data-bs-toggle="modal" data-bs-target="#subcatFunctionModal">Problemer med undervægt</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingFour">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            Hud og Slimhinder
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingFive">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            Kommunikation
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingSix">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                            Psykosociale forhold
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingSeven">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                            Respiration og Cirkulation
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingEight">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                            Seksualitet
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingNine">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                            Smerter og Sanseindtryk
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTen">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                            Søvn og Hvile
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
-                    <div class="card-body">
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingEleven">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                            Viden og Udvikling
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseEleven"  class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwelve">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-                            Udskillelse af affaldsstoffer
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
                 </div>
             </div>
         </div>
-        <app-subcategory-modal-function></app-subcategory-modal-function>
     </div>
+    <!---- Create a container and card for collapse button view ---->
+
+        <app-subcategory-modal-function></app-subcategory-modal-function>
 </main>
 </body>
 <app-footer></app-footer>

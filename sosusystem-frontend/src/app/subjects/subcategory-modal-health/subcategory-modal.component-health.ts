@@ -15,6 +15,7 @@ export class SubcategoryModalComponentHealth implements OnInit {
   @Input() hcId : string;
   @Input() title : string;
   @Input() selectedId : string;
+  @Input() healthItemId : any;
   constructor(private _service : SubjectService) { }
 
   updateForm = new FormGroup({
@@ -29,7 +30,10 @@ export class SubcategoryModalComponentHealth implements OnInit {
 
 clickSave() {
     let hcItem = this.updateForm.value as HealthConditionItemDto;
-        this._service
+
+}
+clicktest(){
+console.log(this.healthItemId)
 }
 
 
