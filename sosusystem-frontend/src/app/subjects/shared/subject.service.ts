@@ -8,6 +8,7 @@ import {GeneralDto} from "./general.dto";
 import {HealthDto} from "./health.dto";
 import {HealthConditionItemDto} from "./healthconditionitem.dto";
 import {FunctionDto} from "./function.dto";
+import {FunctionItemDto} from "./functionitem.dto";
 
 
 @Injectable({
@@ -38,12 +39,20 @@ export class SubjectService {
     return this._http.get<HealthDto>(environment.api + '/subjects/' + subjectId + '/health-conditions/' + healthId)
   }
 
+  getAllFunctionItems(subjectId: string, functionId: string) {
+    return this._http.get<FunctionDto>(environment.api + '/subjects/' + subjectId + '/function-abilities/' + functionId)
+  }
+
   updateSubject(subjectId: string, subjectDto: SubjectDto): Observable<SubjectDto> {
     return this._http.patch<SubjectDto>(environment.api + '/subjects/' + subjectId, subjectDto);
   }
 
+  updateFunctionItem(subjectId: string, faId: string, faItemId: string, functionItemDto: FunctionItemDto ) {
+    return this._http.patch(environment.api + '/subjects/' + subjectId + '/function-abilities/' + faId + '/' + faItemId, functionItemDto)
+  }
+
   updateHcItem(subjectId: string, hcId: string, hcItemId: string, healthItemDto: HealthConditionItemDto ) {
-    return this._http.patch(environment.api + '/subjects/' + subjectId + '/health-conditions/' + hcId + '/' + hcItemId,healthItemDto)
+    return this._http.patch(environment.api + '/subjects/' + subjectId + '/health-conditions/' + hcId + '/' + hcItemId, healthItemDto)
   }
 
   updateSubjectGeneralInformation(subjectId: string, generalInformationId: string, generalDto: GeneralDto): Observable<GeneralDto> {

@@ -5,6 +5,7 @@ import {SubjectDto} from "../shared/subject.dto";
 import {HealthDto} from "../shared/health.dto";
 import {Observable} from "rxjs";
 import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-health-conditions',
@@ -20,6 +21,7 @@ export class HealthConditionsComponent implements OnInit {
   hcId : string
   title: string;
   item : HealthConditionItemDto;
+  updateHandler: any;
 
   constructor(private _service: SubjectService, private _route: ActivatedRoute) { }
 
@@ -31,7 +33,6 @@ export class HealthConditionsComponent implements OnInit {
       this.subject = subjectResult
       this._service.getAllHealth(this.selectedId).subscribe((healthResult) => {
         this.health = healthResult
-
       })
     })
     console.log(this.health)  /// undefined
@@ -40,11 +41,17 @@ export class HealthConditionsComponent implements OnInit {
 
   onClickItem(hcId : string, title : string, item: HealthConditionItemDto) {
     this.hcId = hcId
-    console.log(item.subTitle + "click på ")
     this.item = item
     this.title = title
     this._service.getAllHealthItems(this.selectedId,this.hcId).subscribe((healthItemResult) => {
       this.healthItem = healthItemResult
+
+       this.updateHandler = new FormGroup({
+        comment: new FormControl(this.healthItem.comment),
+        reason: new FormControl(this.healthItem.reason),
+        relevant: new FormControl(this.healthItem.relevant)
+      })
+
     })
 
 

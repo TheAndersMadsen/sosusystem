@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {SubjectService} from "../shared/subject.service";
+import {SubjectDto} from "../shared/subject.dto";
 
 
 @Component({
@@ -15,16 +16,16 @@ export class SubcategoryModalComponentHealth implements OnInit {
   @Input() hcId : string;
   @Input() title : string;
   @Input() selectedId : string;
-  @Input() healthItemId : any;
+  @Input() hcItemId : any;
   @Input() item : HealthConditionItemDto;
-  itemsubtitle: string;
+  @Input() updateHandler: any
 
   constructor(private _service : SubjectService) { }
 
   updateForm = new FormGroup({
-    comment: new FormControl(),
-    reason: new FormControl(),
-    relevant: new FormControl()
+    comment: new FormControl(''),
+    reason: new FormControl(''),
+    relevant: new FormControl('')
   })
 
   ngOnInit(): void {
@@ -32,13 +33,9 @@ export class SubcategoryModalComponentHealth implements OnInit {
   }
 
 clickSave() {
-    let hcItem = this.updateForm.value as HealthConditionItemDto;
+
+  let item = this.updateForm.value as HealthConditionItemDto;
+  this._service.updateHcItem(this.selectedId, this.hcId, this.hcItemId, item)
 
 }
-clicktest(){
-console.log(this.item.subTitle + "plzz virk")
-}
-
-
-
 }

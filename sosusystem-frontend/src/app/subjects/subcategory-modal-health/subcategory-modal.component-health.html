@@ -1,6 +1,7 @@
 <!---- Modal for health subcategories editing, pop up that shows up with click on btn-link ---->
 <div class="modal" id="subcatHealthModal">
     <div class="modal-dialog modal-xl">
+        <form [formGroup]="updateForm">
         <div class="modal-content">
             <div class="modal-header">
                 <header class="modal-title"><b>{{title}}</b> - {{item?.subTitle}}</header>
@@ -8,20 +9,21 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Fagligt notat</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{item?.comment}}</textarea>
-                    <label for="exampleFormControlTextarea1">Nuævrende vurdering</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3">{{item?.reason}}</textarea>
-                    <label for="exampleFormControlTextarea1">Daglig observation</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="3">{{item?.reason}}</textarea>
+                    <label for="comment" >Fagligt notat</label>
+                    <textarea class="form-control" id="comment" formControlName="comment" rows="3">{{item?.comment}}</textarea>
+                    <label for="reason">Nuævrende vurdering</label>
+                    <textarea class="form-control" id="reason" formControlName="reason" rows="3">{{item?.reason}}</textarea>
+                    <label for="relevant">Daglig observation</label>
+                    <textarea class="form-control" id="relevant" formControlName="relevant" rows="3">{{item?.relevant}}</textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" (click)="clicktest()" style="background: darkred" class="btn btn-primary btn-block">Gem som aktiv</button>
-                <button type="submit" style="background: #ff7a1d" class="btn btn-primary btn-block">Gem som potentielt</button>
-                <button type="submit"  style="background: darkgreen" class="btn btn-primary btn-block">Gem som ikke releveant</button>
+                <button type="submit" (click)="clickSave()" style="background: darkred" class="btn btn-primary btn-block">Gem som aktiv</button>
+                <button type="submit" (click)="clickSave()" style="background: #ff7a1d" class="btn btn-primary btn-block">Gem som potentielt</button>
+                <button type="submit" (click)="clickSave()" style="background: darkgreen" class="btn btn-primary btn-block">Gem som ikke releveant</button>
                 <button type="submit" class="btn btn-danger btn-block" data-bs-dismiss="modal">Fortryd</button>
             </div>
         </div>
+        </form>
     </div>
 </div>

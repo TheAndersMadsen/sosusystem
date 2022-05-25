@@ -2,7 +2,7 @@
 <body>
 <main>
     <!---- Create a container and card for title and subtitle ---->
-    <div class="container my-">
+    <div class="container my-2">
         <div class="card-body text-center">
             <h1 class="dashboard-title-font">Helbrdstilstande</h1>
             <h4>{{subject.firstName}}  {{subject.lastName}}</h4>
@@ -33,7 +33,7 @@
 
     <!---- Create a container and card for collapse button view ---->
 
-    <app-subcategory-modal-health [item]="item" [hcId]="hcId" [title]="title" [selectedId]="selectedId" [healthItemId]="healthItem"></app-subcategory-modal-health>
+    <app-subcategory-modal-health [updateHandler]="updateHandler" [item]="item" [hcId]="hcId" [title]="title" [selectedId]="selectedId"></app-subcategory-modal-health>
 </main>
 </body>
 <app-footer></app-footer>

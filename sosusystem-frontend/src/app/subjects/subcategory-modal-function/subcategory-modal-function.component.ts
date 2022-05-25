@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FunctionItemDto} from "../shared/functionitem.dto";
+import {FormControl, FormGroup} from "@angular/forms";
+import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
+import {SubjectService} from "../shared/subject.service";
 
 @Component({
   selector: 'app-subcategory-modal-function',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubcategoryModalFunctionComponent implements OnInit {
 
-  constructor() { }
+  updateForm = new FormGroup({
+    note: new FormControl(''),
+    execution: new FormControl('')
+  })
+
+  @Input() item : FunctionItemDto
+  @Input() title : string
+  @Input() faId : string
+  @Input() selectedId : string;
+  constructor(private _service : SubjectService) { }
 
   ngOnInit(): void {
   }
 
+  clickSave() {
+
+    let item = this.updateForm.value as FunctionItemDto;
+    this._service.updateFunctionItem(this.selectedId, this.faId, this.item._id, item).subscribe();
+
+  }
 }

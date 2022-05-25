@@ -50,7 +50,6 @@ export class GeneralInfoComponent implements OnInit {
   }
 
   clickOnSave(){
-
     if (this.selectedId) {
       let subject = this.updateForm.value as SubjectDto;
       this._service.updateSubject(this.selectedId,subject).subscribe();

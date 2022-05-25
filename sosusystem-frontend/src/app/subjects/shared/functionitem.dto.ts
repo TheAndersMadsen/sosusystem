@@ -1,4 +1,5 @@
 export interface FunctionItemDto {
+    _id: string;
     subTitle: string;
 
     currentLevel: number;

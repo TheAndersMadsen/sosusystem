@@ -3,9 +3,10 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <header class="modal-title"><b>Kategori</b> - Underkategori</header>
+                <header class="modal-title"><b>{{title}}</b> - {{item?.subTitle}}</header>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+            <form [formGroup]="updateForm">
             <div class="modal-body">
                 <div class="form-group">
                     <label data-toggle="tooltip" title="Læs mere om Niveauer på www.FS3.nu">Nuværende niveau</label>
@@ -26,14 +27,15 @@
                         <option value="4">3 - Svære begrænsninger</option>
                         <option value="5">4 - Totale begrænsninger</option>
                     </select> <br>
-                    <label data-toggle="tooltip" title="Hvis ikke niveauet er dækkende, kan der skrives et notat herunder">Fagligt notat</label>
-                    <textarea class="form-control" style="margin-bottom: 2%" id="exampleFormControlTextarea2" rows="3"></textarea>
-                    <label >Daglig observation</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
+                    <label data-toggle="tooltip" title="Hvis ikke niveauet er dækkende, kan der skrives et notat herunder" for="note">Fagligt notat</label>
+                    <textarea class="form-control" style="margin-bottom: 2%" id="note" formControlName="note" rows="3">{{item?.note}}</textarea>
+                    <label for="execution" >Daglig observation</label>
+                    <textarea class="form-control" id="execution" formControlName="execution" rows="3">{{item?.execution}}</textarea>
                 </div>
             </div>
+            </form>
             <div class="modal-footer">
-                <button type="submit" style="background: #ff7a1d" class="btn btn-primary btn-block">Gem som potentielt</button>
+                <button type="submit" (click)="clickSave()" style="background: #ff7a1d" class="btn btn-primary btn-block">Gem som potentielt</button>
                 <button type="submit" style="background: darkgreen" class="btn btn-primary btn-block">Gem som ikke releveant</button>
                 <button type="submit" class="btn btn-danger btn-block" data-bs-dismiss="modal">Fortryd</button>
             </div>

@@ -2,7 +2,7 @@
 <body>
 <main>
     <!---- Create a container and card for title and subtitle ---->
-    <div class="container my-">
+    <div class="container my-2">
         <div class="card-body text-center">
             <h1 class="dashboard-title-font">Funktions tilstand</h1>
             <h4>{{subject.firstName}} {{subject.lastName}}</h4>
@@ -23,7 +23,7 @@
                 <div class="collapse show" aria-labelledby="john" data-bs-parent="accordion1">
 
                     <div class="row" *ngFor="let items of function.functionAbilityItems">
-                        <button class="btn btn-link" style="color: #487288" data-bs-toggle="modal"
+                        <button class="btn btn-link" (click)="onClickItem(function._id, function.title, items)" style="color: #487288" data-bs-toggle="modal"
                                 data-bs-target="#subcatFunctionModal">{{items.subTitle}}</button>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
     </div>
     <!---- Create a container and card for collapse button view ---->
 
-        <app-subcategory-modal-function></app-subcategory-modal-function>
+        <app-subcategory-modal-function [item]="item" [title]="title" [faId]="faId" [selectedId]="selectedId" ></app-subcategory-modal-function>
 </main>
 </body>
 <app-footer></app-footer>
