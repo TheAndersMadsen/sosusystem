@@ -23,8 +23,11 @@ export class NavModalComponent implements OnInit {
     }
 
     onCLickGI(selectedId: string) {
-        this._router.navigate(['subjects/general-information', selectedId])
+        this._router.navigate(['/general-information', selectedId])
+    }
 
+    onCLickHC(selectedId: string) {
+        this._router.navigate(['/health-conditions', selectedId])
     }
 
 }
