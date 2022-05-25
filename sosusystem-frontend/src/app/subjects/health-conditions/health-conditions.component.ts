@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SubjectService} from "../shared/subject.service";
 import {ActivatedRoute} from "@angular/router";
 import {SubjectDto} from "../shared/subject.dto";
+import {HealthDto} from "../shared/health.dto";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-health-conditions',
@@ -12,17 +14,24 @@ export class HealthConditionsComponent implements OnInit {
 
   private selectedId: string
   subject : SubjectDto
+  health: any
+
 
   constructor(private _service: SubjectService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.selectedId = String(this._route.snapshot.paramMap.get('id'));
     console.log(this.selectedId,'test')
-    this._service.getSubjectById(this.selectedId).subscribe((result) => {
-      this.subject = result
-
+    this._service.getSubjectById(this.selectedId).subscribe((subjectResult) => {
+      this.subject = subjectResult
+      this._service.getAllHealth(this.selectedId).subscribe((healthResult) => {
+        this.health = healthResult
+      })
     })
-    console.log()  /// undefined
+    console.log(this.health)  /// undefined
   }
+
+
+
 
 }

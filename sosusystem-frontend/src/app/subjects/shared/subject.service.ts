@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {SubjectDto} from "./subject.dto";
 import {GeneralDto} from "./general.dto";
+import {HealthDto} from "./health.dto";
 
 
 @Injectable({
@@ -21,6 +22,10 @@ export class SubjectService {
 
   getSubjectById(id: string): Observable<SubjectDto> {
   return this._http.get<SubjectDto>(environment.api + '/subjects/' + id)
+  }
+
+  getAllHealth(subjectId : string): Observable<HealthDto>{
+    return this._http.get<HealthDto>(environment.api + '/subjects/' + subjectId + '/health-conditions')
   }
 
   updateSubject(subjectId: string, subjectDto: SubjectDto): Observable<SubjectDto> {
