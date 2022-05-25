@@ -127,7 +127,7 @@ export class SubjectsController {
   }
 
   @Get(
-    ':subjectId/function-abilities/:functionAbilityId/function-ability-items',
+    ':subjectId/function-abilities/:functionAbilityId',
   )
   async findAllFunctionAbilityItems(
     @Param('subjectId') subjectId: string,
