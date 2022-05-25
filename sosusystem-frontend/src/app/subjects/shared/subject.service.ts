@@ -27,6 +27,9 @@ export class SubjectService {
   getAllHealth(subjectId : string): Observable<HealthDto>{
     return this._http.get<HealthDto>(environment.api + '/subjects/' + subjectId + '/health-conditions')
   }
+  getAllHealthItems(subjectId: string, healthId: string) {
+    return this._http.get<HealthDto>(environment.api + '/subjects/' + subjectId + '/health-conditions/' + healthId)
+  }
 
   updateSubject(subjectId: string, subjectDto: SubjectDto): Observable<SubjectDto> {
     return this._http.patch<SubjectDto>(environment.api + '/subjects/' + subjectId, subjectDto);

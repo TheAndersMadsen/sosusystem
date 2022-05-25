@@ -23,7 +23,7 @@
                 <div class="collapse show" aria-labelledby="john" data-bs-parent="accordion">
 
                     <div class="row" *ngFor="let items of health.healthConditionItems">
-                        <button class="btn btn-link" style="color: lightgreen" data-bs-toggle="modal"
+                        <button class="btn btn-link" (click)="onClickItem(health._id,health.title)" style="color: lightgreen" data-bs-toggle="modal"
                                 data-bs-target="#subcatHealthModal">{{items.subTitle}}</button>
                     </div>
                 </div>

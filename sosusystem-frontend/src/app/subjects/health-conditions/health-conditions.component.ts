@@ -15,11 +15,13 @@ export class HealthConditionsComponent implements OnInit {
   private selectedId: string
   subject : SubjectDto
   health: any
-
+  hcId : string
+  title: string;
 
   constructor(private _service: SubjectService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
     this.selectedId = String(this._route.snapshot.paramMap.get('id'));
     console.log(this.selectedId,'test')
     this._service.getSubjectById(this.selectedId).subscribe((subjectResult) => {
@@ -31,6 +33,14 @@ export class HealthConditionsComponent implements OnInit {
     console.log(this.health)  /// undefined
   }
 
+
+  onClickItem(hcId : string, title : string) {
+    this.hcId = hcId
+    this.title = title
+    console.log(this.hcId)
+    console.log(this.title)
+
+  }
 
 
 

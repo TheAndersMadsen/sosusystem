@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 
 @Component({
@@ -8,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubcategoryModalComponentHealth implements OnInit {
 
+  @Input() hcId : string;
+  @Input() title : string;
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
+testOnClick() {
+    console.log(this.hcId  + 'sut pik')
+}
 
 }
