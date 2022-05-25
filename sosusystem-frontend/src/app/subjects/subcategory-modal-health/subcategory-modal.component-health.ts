@@ -37,7 +37,6 @@ clickSave() {
 }
 clicktest(){
 console.log(this.item.subTitle + "plzz virk")
-
 }
 
 

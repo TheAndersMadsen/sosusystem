@@ -3,17 +3,17 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <header class="modal-title"><b>{{title}}</b> - {{item}}</header>
+                <header class="modal-title"><b>{{title}}</b> - {{item?.subTitle}}</header>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Fagligt notat</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{item?.comment}}</textarea>
                     <label for="exampleFormControlTextarea1">Nuævrende vurdering</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3">{{item?.reason}}</textarea>
                     <label for="exampleFormControlTextarea1">Daglig observation</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="3">{{item?.reason}}</textarea>
                 </div>
             </div>
             <div class="modal-footer">
