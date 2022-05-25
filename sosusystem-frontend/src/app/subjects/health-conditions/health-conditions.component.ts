@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {SubjectDto} from "../shared/subject.dto";
 import {HealthDto} from "../shared/health.dto";
 import {Observable} from "rxjs";
+import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
 
 @Component({
   selector: 'app-health-conditions',
@@ -18,6 +19,7 @@ export class HealthConditionsComponent implements OnInit {
   healthItem: any
   hcId : string
   title: string;
+  item : HealthConditionItemDto;
 
   constructor(private _service: SubjectService, private _route: ActivatedRoute) { }
 
@@ -36,12 +38,10 @@ export class HealthConditionsComponent implements OnInit {
   }
 
 
-  onClickItem(hcId : string, title : string, item: any) {
+  onClickItem(hcId : string, title : string, item: HealthConditionItemDto) {
     this.hcId = hcId
-    console.log(item.subTitle)
-    var result = Object.keys(item).map((key) => [Number(key), item[key]]);
-
-    console.log(result);
+    console.log(item.subTitle + "click på ")
+    this.item = item
     this.title = title
     this._service.getAllHealthItems(this.selectedId,this.hcId).subscribe((healthItemResult) => {
       this.healthItem = healthItemResult

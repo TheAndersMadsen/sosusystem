@@ -16,6 +16,9 @@ export class SubcategoryModalComponentHealth implements OnInit {
   @Input() title : string;
   @Input() selectedId : string;
   @Input() healthItemId : any;
+  @Input() item : HealthConditionItemDto;
+  itemsubtitle: string;
+
   constructor(private _service : SubjectService) { }
 
   updateForm = new FormGroup({
@@ -33,7 +36,8 @@ clickSave() {
 
 }
 clicktest(){
-console.log(this.healthItemId)
+console.log(this.item.subTitle + "plzz virk")
+
 }
 
 
