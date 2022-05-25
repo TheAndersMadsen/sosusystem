@@ -166,9 +166,7 @@ export class SubjectsService {
     subjectId: string,
     functionAbilityId: string,
   ): Promise<FunctionAbilityItem[]> {
-    return await this.getValidSubject(subjectId).then(
-      async () => await this.getValidFunctionAbility(functionAbilityId)
-      .then((f) => f.functionAbilityItems));
+    return await this.getValidSubject(subjectId).then(async () => await this.getValidFunctionAbility(functionAbilityId)).then(f => f.functionAbilityItems)
   }
 
   async findOneFunctionAbilityItem(
