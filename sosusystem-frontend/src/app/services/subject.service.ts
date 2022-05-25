@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {SubjectList} from "./subject-list";
+import {SubjectList} from "../subjects/shared/subject-list";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {SubjectDto} from "./subject.dto";
-import {GeneralDto} from "./general.dto";
-import {HealthDto} from "./health.dto";
-import {HealthConditionItemDto} from "./healthconditionitem.dto";
-import {FunctionDto} from "./function.dto";
-import {FunctionItemDto} from "./functionitem.dto";
+import {environment} from "../../environments/environment";
+import {SubjectDto} from "../subjects/shared/subject.dto";
+import {GeneralDto} from "../subjects/shared/general.dto";
+import {HealthDto} from "../subjects/shared/health.dto";
+import {HealthConditionItemDto} from "../subjects/shared/healthconditionitem.dto";
+import {FunctionDto} from "../subjects/shared/function.dto";
+import {FunctionItemDto} from "../subjects/shared/functionitem.dto";
 
 
 @Injectable({

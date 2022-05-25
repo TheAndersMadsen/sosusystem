@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FunctionItemDto} from "../shared/functionitem.dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
-import {SubjectService} from "../shared/subject.service";
+import {SubjectService} from "../../services/subject.service";
 
 @Component({
   selector: 'app-subcategory-modal-function',

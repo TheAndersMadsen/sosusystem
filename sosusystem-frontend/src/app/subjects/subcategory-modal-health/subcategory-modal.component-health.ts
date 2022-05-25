@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {SubjectService} from "../shared/subject.service";
+import {SubjectService} from "../../services/subject.service";
 import {SubjectDto} from "../shared/subject.dto";
 
 

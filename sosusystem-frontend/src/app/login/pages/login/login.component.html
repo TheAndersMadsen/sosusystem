@@ -7,10 +7,10 @@
             <div class="login-border">
                 <img class="logo-img" src="/assets/sosu-logo.png"
                     alt="">
-                <form class="form-signin">
-                <input type="text" class="form-control" placeholder="E-mail" required autofocus>
-                <input type="password" class="form-control" placeholder="Adgangskode" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <form [formGroup]="form" class="form-signin">
+                <input type="text" class="form-control" formControlName="userName" placeholder="Brugernavn" required autofocus>
+                <input type="password" class="form-control" formControlName="password"  placeholder="Adgangskode" required>
+                <button class="btn btn-lg btn-primary btn-block" (click)="login()" type="submit">
                     Log på</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">

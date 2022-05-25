@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {catchError, Observable, throwError} from "rxjs";
 import {SubjectList} from "../shared/subject-list";
-import {SubjectService} from "../shared/subject.service";
+import {SubjectService} from "../../services/subject.service";
 import {SubjectDto} from "../shared/subject.dto";
 
 @Component({

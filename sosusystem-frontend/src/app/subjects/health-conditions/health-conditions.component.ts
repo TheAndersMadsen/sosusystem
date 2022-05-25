@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SubjectService} from "../shared/subject.service";
+import {SubjectService} from "../../services/subject.service";
 import {ActivatedRoute} from "@angular/router";
 import {SubjectDto} from "../shared/subject.dto";
 import {HealthDto} from "../shared/health.dto";

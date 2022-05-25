@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {SubjectService} from "../shared/subject.service";
+import {SubjectService} from "../../services/subject.service";
 import {ActivatedRoute} from "@angular/router";
 import {SubjectDto} from "../shared/subject.dto";
 import {GeneralDto} from "../shared/general.dto";
