@@ -94,7 +94,20 @@ export class SubjectsController {
     );
   }
 
-  @Get(':subjectId/health-conditions/:healthConditionId/:healthConditionItemId')
+  @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items')
+  async findAllHealthConditionItems(
+    @Param('subjectId') subjectId: string,
+    @Param('healthConditionId') healthConditionId: string,
+  ) {
+    return this.subjectsService.findAllHealthConditionItems(
+      subjectId,
+      healthConditionId,
+    );
+  }
+
+  @Get(
+    ':subjectId/health-conditions/:healthConditionId/health-condition-items/:healthConditionItemId',
+  )
   async findOneHealthConditionItem(
     @Param('subjectId') subjectId: string,
     @Param('healthConditionId') healthConditionId: string,
@@ -113,19 +126,21 @@ export class SubjectsController {
     return this.subjectsService.findAllFunctionAbilities(subjectId);
   }
 
-  @Get(':subjectId/function-abilities/:functionAbilityId/')
-  async findOneFunctionAbility(
+  @Get(
+    ':subjectId/function-abilities/:functionAbilityId/function-ability-items',
+  )
+  async findAllFunctionAbilityItems(
     @Param('subjectId') subjectId: string,
     @Param('functionAbilityId') functionAbilityId: string,
   ) {
-    return this.subjectsService.findOneFunctionAbility(
+    return this.subjectsService.findAllFunctionAbilityItems(
       subjectId,
       functionAbilityId,
     );
   }
 
   @Get(
-    ':subjectId/function-abilities/:functionAbilityId/:functionAbilityItemId',
+    ':subjectId/function-abilities/:functionAbilityId/function-ability-items/:functionAbilityItemId',
   )
   async findOneFunctionAbilityItem(
     @Param('subjectId') subjectId: string,
@@ -170,7 +185,7 @@ export class SubjectsController {
   }
 
   @Patch(
-    ':subjectId/health-conditions/:functionAbilityId/:functionAbilityItemId',
+    ':subjectId/function-abilities/:functionAbilityId/:functionAbilityItemId',
   )
   async updateFunctionAbilityItem(
     @Param('subjectId') subjectId: string,
