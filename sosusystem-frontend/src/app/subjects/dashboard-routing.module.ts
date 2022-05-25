@@ -7,11 +7,10 @@ import {HealthConditionsComponent} from "./health-conditions/health-conditions.c
 import {DashboardComponent} from "./dashboard/dashboard.component";
 
 const routes: Routes = [
-  { path: 'function-abilities', component: FunctionAbilityComponent },
-  { path: 'health-conditions', component: HealthConditionsComponent },
   { path: 'dashboard', component: DashboardComponent},
   { path: 'general-information/:id', component: GeneralInfoComponent },
-  { path: 'health-conditions/:id', component: HealthConditionsComponent }
+  { path: 'health-conditions/:id', component: HealthConditionsComponent },
+  { path: 'function-abilities/:id', component: FunctionAbilityComponent }
 ];
 
 @NgModule({

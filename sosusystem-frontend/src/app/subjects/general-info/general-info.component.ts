@@ -16,7 +16,6 @@ export class GeneralInfoComponent implements OnInit {
   private selectedId: string
   subject : SubjectDto
   generalDto : GeneralDto
-  newSubject : SubjectDto
 
   updateForm = new FormGroup({
     firstName: new FormControl('', Validators.required),

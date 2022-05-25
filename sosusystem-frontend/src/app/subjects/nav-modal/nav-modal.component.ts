@@ -29,5 +29,8 @@ export class NavModalComponent implements OnInit {
     onCLickHC(selectedId: string) {
         this._router.navigate(['/health-conditions', selectedId])
     }
+    onCLickFA(selectedId: string) {
+        this._router.navigate(['/function-abilities', selectedId])
+    }
 
 }
