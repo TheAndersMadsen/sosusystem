@@ -32,8 +32,7 @@ export class AuthenticationController {
 
     const token = this.authenticationService.signUser(user.userName);
 
-    request.res?.setHeader('JWT-TOKEN', token);
-    return user + token;
+    return { user, token: token };
   }
 
   @UseGuards(JwtAuthenticationGuard)
