@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  searchText: any;
   form: FormGroup;
   constructor(private store: Store,
               private fb: FormBuilder,
