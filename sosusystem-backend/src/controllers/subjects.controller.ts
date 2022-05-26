@@ -194,7 +194,7 @@ export class SubjectsController {
   }
 
   @Patch(
-    ':subjectId/health-conditions/:functionAbilityId/:functionAbilityItemId',
+    ':subjectId/function-abilities/:functionAbilityId/:functionAbilityItemId',
   )
   async updateFunctionAbilityItem(
     @Param('subjectId') subjectId: string,
