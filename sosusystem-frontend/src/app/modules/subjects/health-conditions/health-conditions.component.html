@@ -1,0 +1,39 @@
+<app-nav-bar></app-nav-bar>
+<body>
+<main>
+    <!---- Create a container and card for title and subtitle ---->
+    <div class="container my-2">
+        <div class="card-body text-center">
+            <h1 class="dashboard-title-font">Helbrdstilstande</h1>
+            <h4>{{subject.firstName}}  {{subject.lastName}}</h4>
+        </div>
+    </div>
+    <!---- Create a container and card for collapse button view ---->
+    <div class="container my-2" style="padding-bottom: 10%">
+        <div id="accordion"  *ngFor="let health of health">
+            <div class="card">
+                <div class="card-header" id="john">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-bs-toggle="#collapse" data-bs-target="luk1"
+                                aria-expanded="true" aria-controls="luk1">
+                            {{health.title}}
+                        </button>
+                    </h5>
+                </div>
+                <div class="collapse show" aria-labelledby="john" data-bs-parent="accordion">
+
+                    <div class="row" *ngFor="let items of health.healthConditionItems">
+                        <button class="btn btn-link" (click)="onClickItem(health._id,health.title, items)" style="color: #487288" data-bs-toggle="modal"
+                                data-bs-target="#subcatHealthModal">{{items.subTitle}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---- Create a container and card for collapse button view ---->
+
+    <app-subcategory-modal-health [updateHandler]="updateHandler" [item]="item" [hcId]="hcId" [title]="title" [selectedId]="selectedId"></app-subcategory-modal-health>
+</main>
+</body>
+<app-footer></app-footer>

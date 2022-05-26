@@ -1,0 +1,50 @@
+<app-nav-bar></app-nav-bar>
+<body>
+<main>
+    <!---- Make container and card for title, text and search bar ----->
+    <div class="container my-5">
+        <div class="card-body text-center">
+            <h1 class="dashboard-title-font">Liste af Borgere</h1>
+            <h4 class="card-text"> Tryk eller søg på den ønskede borgere for at opdatere journalen</h4>
+
+            <div class="input-group">
+                <div class="form-outline flex-fill">
+                    <input placeholder="Søg efter borger" [(ngModel)]="searchText" type="search" id="form1"class="form-control form-control-lg"/>
+
+                </div>
+            </div>
+        </div>
+        <!----- The card which holds the table, where information is shown ------>
+
+        <div  class="card">
+            <table class="table table-hover">
+                <thead class="thead">
+                <tr>
+                <th scope="col"><h3> Fornavn</h3></th>
+                <th scope="col"><h3>Efternavn</h3></th>
+                <th scope="col"><h3>Email</h3></th>
+                <th scope="col"><h3>Phone</h3></th>
+                <th scope="col"><h3>Udvælg</h3></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let subject of subjects$ | filter:searchText">
+                    <td><h4>{{subject.firstName}}</h4></td>
+                    <td><h4>{{subject.lastName}}</h4></td>
+                    <td><h4>{{subject.email}}</h4></td>
+                    <td><h4>{{subject.phone}}</h4></td>
+                    <td>
+                        <button class="btn btn-primary btn-lg" (click)="onSelectedSubject(subject._id,subject.firstName,subject.lastName)" data-bs-toggle="modal" data-bs-target="#subNavModal">Vælg
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    <app-nav-modal [selectedId]="selectedId" [selectedFirstName]="selectedFirstName" [selectedLastName]="selectedLastName"></app-nav-modal>
+</main>
+
+</body>
+<!---- Footer for esthetics :) ----->
+<app-footer></app-footer>
