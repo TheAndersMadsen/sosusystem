@@ -12,7 +12,6 @@ import {SubcategoryModalComponentHealth} from "./subcategory-modal-health/subcat
 import {SubcategoryModalFunctionComponent} from "./subcategory-modal-function/subcategory-modal-function.component";
 import {DashboardComponent} from "../../components/dashboard/dashboard.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AppModule} from "../../app.module";
 import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 
@@ -35,6 +34,6 @@ import {Ng2SearchPipeModule} from "ng2-search-filter";
     ReactiveFormsModule,
     FormsModule,
     Ng2SearchPipeModule
-  ]
+  ],
 })
 export class SubjectsModule { }
