@@ -21,11 +21,11 @@ export class FunctionAbilityItem {
   @Prop()
   note: string;
 
-  @Prop()
-  execution: string;
+  @Prop( {min: 0, max: 3)
+  execution: number;
 
-  @Prop()
-  meaningOfExecution: string;
+  @Prop( {min: 0, max: 3)
+  meaningOfExecution: number;
 
   @Prop()
   subjectWish: string;
