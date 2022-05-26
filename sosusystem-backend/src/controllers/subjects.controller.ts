@@ -123,21 +123,6 @@ export class SubjectsController {
       functionAbilityId,
     );
   }
-
-  @Get(
-    ':subjectId/function-abilities/:functionAbilityId/:functionAbilityItemId',
-  )
-  async findOneFunctionAbilityItem(
-    @Param('subjectId') subjectId: string,
-    @Param('functionAbilityId') functionAbilityId: string,
-    @Param('functionAbilityItemId') functionAbilityItemId: string,
-  ) {
-    return this.subjectsService.findOneFunctionAbilityItem(
-      subjectId,
-      functionAbilityId,
-      functionAbilityItemId,
-    );
-  }
   
     @Get(
     ':subjectId/function-abilities/:functionAbilityId/function-ability-items/:functionAbilityItemId',
