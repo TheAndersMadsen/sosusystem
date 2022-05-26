@@ -29,9 +29,11 @@ export class AuthenticationController {
   @Post('log-in')
   async logIn(@Req() request: RequestWithUser) {
     const { user } = request;
+
     const token = this.authenticationService.signUser(user.userName);
+
     request.res?.setHeader('JWT-TOKEN', token);
-    return user;
+    return user + token;
   }
 
   @UseGuards(JwtAuthenticationGuard)

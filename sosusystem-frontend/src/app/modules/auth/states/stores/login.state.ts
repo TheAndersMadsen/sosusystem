@@ -1,7 +1,7 @@
 import { Login, Logout } from '../actions/login.actions';
 import { LoginService } from '../../../../services/login.service';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
-import { tap, catchError } from 'rxjs/operators';
+import {tap, catchError, map} from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import {Injectable} from "@angular/core";
 
@@ -29,9 +29,10 @@ export class AuthState {
     @Action(Login)
     // tslint:disable-next-line: typedef
     login({ patchState }: StateContext<AuthStateModel>, { payload }: Login) {
-        return this.loginService.login(payload).pipe(tap((result: { token: string }) => {
-            console.log(result.token, payload.userName )
-                patchState({ token: result.token, username: payload.userName });
+
+        return this.loginService.login(payload).pipe(tap((response: any) => {
+
+                //patchState({ token: result.token, username: payload.userName });
             },
             catchError((err) => {
                 return throwError(`Invalid username or password`);
