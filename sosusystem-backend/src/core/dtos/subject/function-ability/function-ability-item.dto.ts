@@ -9,9 +9,9 @@ export class CreateFunctionAbilityItemDto {
 
   note: string;
 
-  execution: string;
+  execution: number;
 
-  meaningOfExecution: string;
+  meaningOfExecution: number;
 
   subjectWish: string;
 }
