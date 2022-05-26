@@ -123,6 +123,15 @@ export class SubjectsService {
 
     return healthCondition;
   }
+  
+    async findAllHealthConditionItems(
+    subjectId: string,
+    healthConditionId: string,
+  ): Promise<HealthConditionItem[]> {
+    return await this.getValidSubject(subjectId)
+      .then(async () => await this.getValidHealthCondition(healthConditionId))
+      .then((h) => h.healthConditionItems);
+  }
 
   async findOneHealthConditionItem(
     subjectId: string,
