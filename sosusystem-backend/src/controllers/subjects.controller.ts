@@ -94,7 +94,20 @@ export class SubjectsController {
     );
   }
 
-  @Get(':subjectId/health-conditions/:healthConditionId/:healthConditionItemId')
+//  @Get(':subjectId/health-conditions/:healthConditionId/:healthConditionItemId')
+ // async findOneHealthConditionItem(
+   // @Param('subjectId') subjectId: string,
+   /// @Param('healthConditionId') healthConditionId: string,
+   // @Param('healthConditionItemId') healthConditionItemId: string,
+ // ) {
+   // return this.subjectsService.findOneHealthConditionItem(
+     // subjectId,
+     // healthConditionId,
+     // healthConditionItemId,
+   // );
+ // }
+  
+    @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items/:healthConditionItemId')
   async findOneHealthConditionItem(
     @Param('subjectId') subjectId: string,
     @Param('healthConditionId') healthConditionId: string,
