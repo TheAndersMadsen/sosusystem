@@ -346,8 +346,8 @@ export class SubjectsService {
             subTitle: subTitle,
             currentLevel: null,
             expectedLevel: null,
-            execution: '',
-            meaningOfExecution: '',
+            execution: null,
+            meaningOfExecution: null,
             subjectWish: '',
             note: '',
           });
