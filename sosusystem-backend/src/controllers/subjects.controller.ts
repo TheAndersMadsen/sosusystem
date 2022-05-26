@@ -107,6 +107,17 @@ export class SubjectsController {
    // );
  // }
   
+    @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items')
+  async findAllHealthConditionItems(
+    @Param('subjectId') subjectId: string,
+    @Param('healthConditionId') healthConditionId: string,
+  ) {
+    return this.subjectsService.findAllHealthConditionItems(
+      subjectId,
+      healthConditionId,
+    );
+  }
+  
     @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items/:healthConditionItemId')
   async findOneHealthConditionItem(
     @Param('subjectId') subjectId: string,
