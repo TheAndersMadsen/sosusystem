@@ -30,6 +30,7 @@ export class AuthState {
     // tslint:disable-next-line: typedef
     login({ patchState }: StateContext<AuthStateModel>, { payload }: Login) {
         return this.loginService.login(payload).pipe(tap((result: { token: string }) => {
+            console.log(result.token, payload.userName )
                 patchState({ token: result.token, username: payload.userName });
             },
             catchError((err) => {
