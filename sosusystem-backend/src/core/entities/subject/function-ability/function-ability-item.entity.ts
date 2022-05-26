@@ -7,9 +7,9 @@ export class FunctionAbilityItem {
 
   note: string;
 
-  execution: string;
+  execution: number;
 
-  meaningOfExecution: string;
+  meaningOfExecution: number;
 
   subjectWish: string;
 }
