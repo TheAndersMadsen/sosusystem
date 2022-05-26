@@ -160,11 +160,13 @@ export class SubjectsService {
     functionAbilityId: string,
     functionAbilityItemId: string,
   ): Promise<FunctionAbilityItem> {
-    return await this.getValidSubject(subjectId)
-      .then(async () => this.getValidFunctionAbility(functionAbilityId))
-      .then(async () =>
-        this.getValidFunctionAbilityItem(functionAbilityItemId),
+    const functionAbilityItem = await this.getValidSubject(subjectId)
+      .then(async () => await this.getValidFunctionAbility(functionAbilityId))
+      .then(
+        async () =>
+          await this.getValidFunctionAbilityItem(functionAbilityItemId),
       );
+    return functionAbilityItem;
   }
 
   async updateGeneralInformation(
