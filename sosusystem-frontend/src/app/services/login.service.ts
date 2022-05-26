@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {User} from '../models/User'
+import {LoginDto} from '../dtos/login.dto'
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from "rxjs";
 
@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(user: User): Observable<any> {
+  login(user: LoginDto): Observable<any> {
     return this.http.post(`${URL}/authentication/log-in`, user);
   }
 }
