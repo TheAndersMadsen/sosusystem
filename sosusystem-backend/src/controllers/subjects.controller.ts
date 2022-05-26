@@ -138,6 +138,21 @@ export class SubjectsController {
       functionAbilityItemId,
     );
   }
+  
+    @Get(
+    ':subjectId/function-abilities/:functionAbilityId/function-ability-items/:functionAbilityItemId',
+  )
+  async findOneFunctionAbilityItem(
+    @Param('subjectId') subjectId: string,
+    @Param('functionAbilityId') functionAbilityId: string,
+    @Param('functionAbilityItemId') functionAbilityItemId: string,
+  ) {
+    return this.subjectsService.findOneFunctionAbilityItem(
+      subjectId,
+      functionAbilityId,
+      functionAbilityItemId,
+    );
+  }
 
   @Patch(':subjectId/general-information/:generalInfoId')
   async updateGeneralInfo(
