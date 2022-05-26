@@ -10,6 +10,7 @@ import {SubjectDto} from "../../dtos/subject.dto";
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+    searchText: any;
     subjects$: any;
     $error: string | undefined;
     public subjectId: string;

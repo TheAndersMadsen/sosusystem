@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import { SubjectsRoutingModule } from './modules/subjects/subjects-routing.module';
 import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
 import {NgxsModule} from "@ngxs/store";
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {NgxsModule} from "@ngxs/store";
     }),
     BrowserModule,
     AppRoutingModule,
+    Ng2SearchPipeModule,
     SubjectsRoutingModule,
     NgbModule,
     HttpClientModule,

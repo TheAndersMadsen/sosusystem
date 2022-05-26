@@ -9,7 +9,7 @@
 
             <div class="input-group">
                 <div class="form-outline flex-fill">
-                    <input placeholder="Søg efter borger" type="search" id="form1"class="form-control form-control-lg"/>
+                    <input placeholder="Søg efter borger" [(ngModel)]="searchText" type="search" id="form1"class="form-control form-control-lg"/>
 
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let subject of subjects$">
+                <tr *ngFor="let subject of subjects$ | filter:searchText">
                     <td><h4>{{subject.firstName}}</h4></td>
                     <td><h4>{{subject.lastName}}</h4></td>
                     <td><h4>{{subject.email}}</h4></td>

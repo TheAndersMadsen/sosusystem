@@ -13,6 +13,7 @@ import {SubcategoryModalFunctionComponent} from "./subcategory-modal-function/su
 import {DashboardComponent} from "../../components/dashboard/dashboard.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppModule} from "../../app.module";
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 
 
@@ -32,7 +33,8 @@ import {AppModule} from "../../app.module";
     CommonModule,
     SubjectsRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule
   ]
 })
 export class SubjectsModule { }
