@@ -1,5 +1,5 @@
-import { Login, Logout } from './../actions/login.actions';
-import { LoginService } from './../../../services/login.service';
+import { Login, Logout } from '../actions/login.actions';
+import { LoginService } from '../../../../services/login.service';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';

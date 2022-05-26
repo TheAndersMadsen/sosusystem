@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {catchError, Observable, throwError} from "rxjs";
-import {SubjectList} from "../shared/subject-list";
+import {SubjectListDto} from "../../dtos/subject-listDto";
 import {SubjectService} from "../../services/subject.service";
-import {SubjectDto} from "../shared/subject.dto";
+import {SubjectDto} from "../../dtos/subject.dto";
 
 @Component({
     selector: 'app-dashboard',

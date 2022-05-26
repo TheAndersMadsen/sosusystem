@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {SubjectList} from "../subjects/shared/subject-list";
+import {SubjectListDto} from "../dtos/subject-listDto";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {SubjectDto} from "../subjects/shared/subject.dto";
-import {GeneralDto} from "../subjects/shared/general.dto";
-import {HealthDto} from "../subjects/shared/health.dto";
-import {HealthConditionItemDto} from "../subjects/shared/healthconditionitem.dto";
-import {FunctionDto} from "../subjects/shared/function.dto";
-import {FunctionItemDto} from "../subjects/shared/functionitem.dto";
+import {SubjectDto} from "../dtos/subject.dto";
+import {GeneralDto} from "../dtos/general.dto";
+import {HealthDto} from "../dtos/health.dto";
+import {HealthConditionItemDto} from "../dtos/healthconditionitem.dto";
+import {FunctionDto} from "../dtos/function.dto";
+import {FunctionItemDto} from "../dtos/functionitem.dto";
 
 
 @Injectable({
@@ -18,9 +18,9 @@ export class SubjectService {
 
   constructor(private _http: HttpClient) { }
 
-  getSubjects(): Observable<SubjectList> {
-    console.log(this._http.get<SubjectList>(environment.api + '/subjects'))
-    return this._http.get<SubjectList>(environment.api + '/subjects')
+  getSubjects(): Observable<SubjectListDto> {
+    console.log(this._http.get<SubjectListDto>(environment.api + '/subjects'))
+    return this._http.get<SubjectListDto>(environment.api + '/subjects')
   }
 
   getSubjectById(id: string): Observable<SubjectDto> {

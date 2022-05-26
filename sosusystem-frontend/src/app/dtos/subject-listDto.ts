@@ -1,5 +1,5 @@
 import{SubjectDto} from "./subject.dto";
 
-export interface SubjectList {
+export interface SubjectListDto {
     subjectList : SubjectDto[];
 }

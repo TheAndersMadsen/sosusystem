@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FunctionItemDto} from "../shared/functionitem.dto";
+import {FunctionItemDto} from "../../../dtos/functionitem.dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
-import {SubjectService} from "../../services/subject.service";
+import {HealthConditionItemDto} from "../../../dtos/healthconditionitem.dto";
+import {SubjectService} from "../../../services/subject.service";
 
 @Component({
   selector: 'app-subcategory-modal-function',

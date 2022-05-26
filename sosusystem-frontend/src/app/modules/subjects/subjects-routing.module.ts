@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {FunctionAbilityComponent} from "./function-ability/function-ability.component";
 import {GeneralInfoComponent} from "./general-info/general-info.component";
 import {HealthConditionsComponent} from "./health-conditions/health-conditions.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
+import {DashboardComponent} from "../../components/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},

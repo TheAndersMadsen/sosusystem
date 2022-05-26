@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SubjectService} from "../../services/subject.service";
+import {SubjectService} from "../../../services/subject.service";
 import {ActivatedRoute} from "@angular/router";
-import {SubjectDto} from "../shared/subject.dto";
-import {HealthDto} from "../shared/health.dto";
+import {SubjectDto} from "../../../dtos/subject.dto";
+import {HealthDto} from "../../../dtos/health.dto";
 import {Observable} from "rxjs";
-import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
+import {HealthConditionItemDto} from "../../../dtos/healthconditionitem.dto";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({

@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
-import { SubjectsRoutingModule } from './subjects/dashboard-routing.module';
+import { SubjectsRoutingModule } from './modules/subjects/subjects-routing.module';
 import {NgxsStoragePluginModule} from "@ngxs/storage-plugin";
 import {NgxsModule} from "@ngxs/store";
 

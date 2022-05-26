@@ -1,12 +1,12 @@
 
-import { Login } from './../../states/actions/login.actions';
+import { Login } from '../../modules/auth/states/actions/login.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-auth',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

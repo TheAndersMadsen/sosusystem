@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
+import {HealthConditionItemDto} from "../../../dtos/healthconditionitem.dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {SubjectService} from "../../services/subject.service";
-import {SubjectDto} from "../shared/subject.dto";
+import {SubjectService} from "../../../services/subject.service";
+import {SubjectDto} from "../../../dtos/subject.dto";
 
 
 @Component({

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {SubjectService} from "../../services/subject.service";
+import {SubjectService} from "../../../services/subject.service";
 import {ActivatedRoute} from "@angular/router";
-import {SubjectDto} from "../shared/subject.dto";
-import {HealthConditionItemDto} from "../shared/healthconditionitem.dto";
-import {FunctionItemDto} from "../shared/functionitem.dto";
+import {SubjectDto} from "../../../dtos/subject.dto";
+import {HealthConditionItemDto} from "../../../dtos/healthconditionitem.dto";
+import {FunctionItemDto} from "../../../dtos/functionitem.dto";
 
 @Component({
   selector: 'app-function-ability',

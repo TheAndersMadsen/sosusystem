@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output} from '@angular/core';
 import {Router} from "@angular/router";
-import {DashboardComponent} from "../dashboard/dashboard.component";
-import {SubjectDto} from "../shared/subject.dto";
+import {DashboardComponent} from "../../../components/dashboard/dashboard.component";
+import {SubjectDto} from "../../../dtos/subject.dto";
 import {Observable} from "rxjs";
 
 @Component({
