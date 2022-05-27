@@ -18,7 +18,7 @@ export let options = {
 }
 
 export default () => {
-    http.get(__ENV.BASE_URL + "/api/subjects");
+  http.get(__ENV.BASE_URL + "/api/subjects");
 }
 
 export function handleSummary(data) {
