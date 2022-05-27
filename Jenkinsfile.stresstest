@@ -5,17 +5,10 @@ pipeline {
         pollSCM "0 0 * * *"
     }
     stages{
-    
-        stage("Setup test environment") {
-            steps {
-                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-auto.env down"
-                sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-auto.env up -d"
-            }
-        }
         stage("Stress testing the API") {
         
             steps{
-                dir("performanceTests") {
+                dir("sosusystem-frontend/performanceTests"){
                   echo "Starting Stress Test.."
                   sh "k6 run -e BASE_URL=http://185.51.76.10:61001/:61002/api/subjects tests/perf/stress-test.js"
                 }
