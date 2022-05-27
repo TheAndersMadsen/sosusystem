@@ -8,10 +8,10 @@ pipeline {
         stage("Stress testing the API") {
         
             steps{
-                dir("sosusystem-frontend/performanceTests"){
-                  echo "Starting Stress Test.."
-                  sh "k6 run -e BASE_URL=http://185.51.76.10:61001/:61002/api/subjects tests/perf/stress-test.js"
-                }
+
+              echo "Starting Stress Test.."
+              sh "k6 run -e BASE_URL=http://185.51.76.10:61001/:61002/api/subjects tests/perf/stress-test.js"
+
             }
         }
     }
