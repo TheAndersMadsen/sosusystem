@@ -17,7 +17,7 @@ export let options = {
     ]
 }
 
-export default () => 
+export default () => {
     http.get(__ENV.BASE_URL + "/api/subjects");
 }
 
