@@ -6,10 +6,10 @@ import {
 fixture `Visit Admin Login Endpoint`
     .page `http://185.51.76.10:61002/#/login`;
 
-test("Login - An error is displayed if the e-mail does not exist.", async t => {
+test("Login - You won't be redirected if account doesn't exist.", async t => {
     await t
-        .typeText("#loginEmail", "test@test.com")
-        .typeText("#loginPassword", "test123")
+        .typeText("#form2Example17", "anders")
+        .typeText("#form2Example27", "meme")
         .takeScreenshot()
         .click("#app > div > form > button")
         .expect(Selector("#app > div > div").innerText).eql("Login failed, please try again.")

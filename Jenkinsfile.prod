@@ -14,6 +14,7 @@ pipeline {
                 sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-auto.env up -d"
             }
         }
+        
         stage("Update production") {
             steps {
                 sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml --env-file config/prod.env up -d"

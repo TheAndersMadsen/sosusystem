@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        TIMESTAMP = sh(script: "date +%s", returnStdout: true).trim()
+        SCREENSHOT_PATH = "root/screenshots/${TIMESTAMP}"
+        TEST_FOLDER = "tests/${TIMESTAMP}"
+    }
     tools {nodejs "NodeJS"}
 
     triggers {
@@ -56,6 +61,20 @@ pipeline {
         stage("Release To Test Environment") {
             steps {
                 sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.test.yml --env-file config/test-manual.env up -d"
+            }
+        }
+        stage("Execute UI tests") {
+            steps {
+                    echo "Executing TestCafe tests.."
+                    sh "mkdir -p ${SCREENSHOT_PATH}"
+                    sh "chmod a=rwx ${SCREENSHOT_PATH}"
+                    sh "docker run --rm -v ${WORKSPACE}/tests/ui:/tests -v ${WORKSPACE}/${SCREENSHOT_PATH}:/screenshots --env BASE_URL=http://185.51.76.10:61001 testcafe/testcafe chromium /tests/*.js"
+
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: "${SCREENSHOT_PATH}/**", allowEmptyArchive: true
+                }
             }
         }
         stage("Release To Production") {
