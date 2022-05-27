@@ -15,17 +15,6 @@ pipeline {
             }
         }
         
-        stage("Execute UI tests") {
-            steps {
-                    echo "Executing TestCafe tests.."
-                    sh "docker run -v /root/Blogifier/testcafeTests/:/tests -t testcafe/testcafe chromium /tests/ui/*.js"
-            }
-            post {
-                always {
-                    archiveArtifacts artifacts: "${SCREENSHOT_PATH}/**", allowEmptyArchive: true
-                }
-            }
-        }
         stage("Update production") {
             steps {
                 sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml --env-file config/prod.env up -d"
