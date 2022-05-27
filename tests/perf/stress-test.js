@@ -17,8 +17,8 @@ export let options = {
     ]
 }
 
-export default () => {
-    http.get("http://185.51.76.10:61001/" + "/api/subjects");
+export default () => 
+    http.get(__ENV.BASE_URL + "/api/subjects");
 }
 
 export function handleSummary(data) {
