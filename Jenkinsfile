@@ -68,7 +68,8 @@ pipeline {
                     echo "Executing TestCafe tests.."
                     sh "mkdir -p ${SCREENSHOT_PATH}"
                     sh "chmod a=rwx ${SCREENSHOT_PATH}"
-                    sh "docker run -v /root/Blogifier/testcafeTests/:/tests -t testcafe/testcafe chromium /tests/ui/*.js"
+                    sh "docker run --rm -v ${WORKSPACE}/tests/ui:/tests -v ${WORKSPACE}/${SCREENSHOT_PATH}:/screenshots --env BASE_URL=http://185.51.76.10:61001 testcafe/testcafe chromium /tests/*.js"
+
             }
             post {
                 always {
