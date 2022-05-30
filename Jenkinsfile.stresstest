@@ -4,11 +4,16 @@ pipeline {
     triggers {
         pollSCM "0 0 * * *"
     }
+    environment {
+        K6_API_TOKEN=credentials("K6_API_TOKEN")
+        K6_CLOUD_PROJECT_ID=credentials("K6_CLOUD_PROJECT_ID")
+    }
     stages{
         stage("Stress testing the API") {
             steps{
               echo "Starting Stress Test.."
-              sh "k6 run -e BASE_URL=http://185.51.76.10:61001 tests/perf/stress-test.js"
+              sh 'k6 login cloud --token ${K6_API_TOKEN}'
+              sh "k6 cloud -e BASE_URL=http://185.51.76.10:61001 tests/perf/stress-test.js"
 
             }
         }
