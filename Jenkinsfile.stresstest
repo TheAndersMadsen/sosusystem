@@ -4,10 +4,6 @@ pipeline {
     triggers {
         pollSCM "0 0 * * *"
     }
-    environment {
-        K6_API_TOKEN=credentials("K6_API_TOKEN")
-        K6_CLOUD_PROJECT_ID=credentials("K6_CLOUD_PROJECT_ID")
-    }
     stages{
         stage("Stress testing the API") {
             steps{
