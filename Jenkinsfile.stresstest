@@ -8,7 +8,7 @@ pipeline {
         stage("Stress testing the API") {
             steps{
               echo "Starting Stress Test.."
-              sh "docker-compose run --rm k6 run -e BASE_URL=http://185.51.76.10:61001 tests/perf/stress-test.js"
+              sh "k6 run -e BASE_URL=http://185.51.76.10:61001 tests/perf/stress-test.js"
 
             }
         }
