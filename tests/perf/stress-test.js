@@ -13,7 +13,7 @@ export let options = {
         { duration: "5m", target: 300 },
         { duration: "2m", target: 400 },
         { duration: "5m", target: 400 },
-        { duration: "10m", target: 500 },
+        { duration: "10m", target: 0 },
     ]
 }
 
