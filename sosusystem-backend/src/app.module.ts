@@ -1,18 +1,12 @@
 import { Module } from '@nestjs/common';
-import { SubjectsModule } from './services/use-cases/subjects/subjects.module';
-import { AuthenticationModule } from './services/authentication/authentication.module';
+import { SubjectServicesModule } from './services/use-cases/subjects/subjects-sevices.module';
 import { MongoDataServicesModule } from './infrastructure/mongodb/mongo-data-services.module';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './services/authentication/roles/roles.guard';
+import { SubjectsController } from './controllers/subjects.controller';
+//import { APP_GUARD } from '@nestjs/core';
 
 @Module({
-  imports: [MongoDataServicesModule, SubjectsModule, AuthenticationModule],
-  controllers: [],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
-  ],
+  imports: [MongoDataServicesModule, SubjectServicesModule],
+  controllers: [SubjectsController],
+  providers: [],
 })
 export class AppModule {}

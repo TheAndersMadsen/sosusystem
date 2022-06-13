@@ -19,7 +19,6 @@ export class HealthCondition {
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: HealthConditionItem.name,
-      autopopulate: true,
     },
   ])
   @Type(() => HealthConditionItem)
@@ -28,4 +27,3 @@ export class HealthCondition {
 
 export const HealthConditionSchema =
   SchemaFactory.createForClass(HealthCondition);
-HealthConditionSchema.plugin(require('mongoose-autopopulate'));

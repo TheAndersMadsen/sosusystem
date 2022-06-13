@@ -1,15 +1,10 @@
+
 export class FunctionAbilityItem {
   subTitle: string;
-
-  currentLevel: number;
-
-  expectedLevel: number;
-
+  currentLevel: any;
+  expectedLevel: any;
   note: string;
-
-  execution: number;
-
-  meaningOfExecution: number;
-
+  execution: any;
+  meaningOfExecution: any;
   subjectWish: string;
 }

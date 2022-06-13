@@ -72,4 +72,3 @@ export class Subject {
 }
 
 export const SubjectSchema = SchemaFactory.createForClass(Subject);
-SubjectSchema.plugin(require('mongoose-autopopulate'));

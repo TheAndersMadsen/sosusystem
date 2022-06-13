@@ -1,9 +1,5 @@
-import { IsString } from 'class-validator';
-
-export class GeneralInfo {
+export class GeneralInformation {
   title: string;
-
   description: string;
-
   comment: string;
 }

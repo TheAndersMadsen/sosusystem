@@ -17,7 +17,6 @@ export class FunctionAbility {
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: FunctionAbilityItem.name,
-      autopopulate: true,
     },
   ])
   @Type(() => FunctionAbilityItem)
@@ -26,4 +25,3 @@ export class FunctionAbility {
 
 export const FunctionAbilitySchema =
   SchemaFactory.createForClass(FunctionAbility);
-FunctionAbilitySchema.plugin(require('mongoose-autopopulate'));
