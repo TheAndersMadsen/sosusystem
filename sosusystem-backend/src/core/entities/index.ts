@@ -5,4 +5,3 @@ export * from './subject/health-condition/health-condition.entity';
 export * from './subject/health-condition/health-condition-item.entity';
 export * from './subject/function-ability/function-ability.entity';
 export * from './subject/function-ability/function-ability-item.entity';
-export * from './subject/note.entity';

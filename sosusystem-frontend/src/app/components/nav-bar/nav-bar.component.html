@@ -21,5 +21,5 @@
     </ul>
   </div>
 
-  <a style="color: #487288" class="nav-link"  (click)="logout()" ><h4>Log Ud</h4></a>
+  <a style="color: #487288" class="nav-link"  *ngIf="username"  (click)="logout()" ><h4>{{username}} - Log Ud</h4></a>
 </nav>

@@ -1,4 +1,7 @@
-import { Subject, SubjectDto } from '../../../core';
+import {
+  Subject,
+  SubjectDto
+} from '../../../core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

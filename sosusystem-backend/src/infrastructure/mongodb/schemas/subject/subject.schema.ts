@@ -5,7 +5,6 @@ import { Address, AddressSchema } from './address.schema';
 import { HealthCondition } from './health-condition/health-condition.schema';
 import { GeneralInfo } from './general-info/general-info.schema';
 import { FunctionAbility } from './function-ability/function-ability.schema';
-import { Note } from './note.schema';
 
 export type SubjectDocument = Subject & Document;
 
@@ -44,7 +43,6 @@ export class Subject {
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: HealthCondition.name,
-      autopopulate: true,
     },
   ])
   @Type(() => HealthCondition)
@@ -54,21 +52,10 @@ export class Subject {
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: FunctionAbility.name,
-      autopopulate: true,
     },
   ])
   @Type(() => FunctionAbility)
   functionAbilities: FunctionAbility[];
-
-  // @Prop([
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: Note.name,
-  //     autopopulate: true,
-  //   },
-  // ])
-  // @Type(() => Note)
-  // notes: Note[];
 }
 
 export const SubjectSchema = SchemaFactory.createForClass(Subject);

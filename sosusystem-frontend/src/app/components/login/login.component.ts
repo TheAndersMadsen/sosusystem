@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
-import {Login} from "../../modules/auth/auth.state.model";
+import {Login} from "../../modules/auth/auth.actions";
+import {AuthState} from "../../modules/auth/auth.state";
 @Component({
   selector: 'app-auth',
   templateUrl: './login.component.html',
@@ -18,6 +19,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+
+    const isLoggedIn = this.store.selectSnapshot(AuthState.isAuthenticated)
+    if (isLoggedIn) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   initForm() {

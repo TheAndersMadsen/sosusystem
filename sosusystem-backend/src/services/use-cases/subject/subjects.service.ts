@@ -3,11 +3,13 @@ import {
   SubjectDto,
   IDataServices,
   Subject,
+  HealthCondition,
+  CreateHealthConditionDto,
+  UpdateSubjectDto, GeneralInformation, CreateGeneralInfoDto
 } from '../../../core';
 import { SubjectFactoryService } from './subject-factory.service';
 
 @Injectable()
-
 export class SubjectServices {
   constructor(
     private dataServices: IDataServices,
@@ -16,16 +18,14 @@ export class SubjectServices {
 
   async create(subjectDto: SubjectDto): Promise<Subject> {
     const subject = this.subjectFactoryService.createNewSubject(subjectDto);
-
     return await this.dataServices.subjects.create(subject);
   }
-  
+
+
   async findAll(): Promise<Subject[]> {
     const subjects = await this.dataServices.subjects.findAll();
-
     return subjects;
   }
-
 
   async findOne(subjectId: string): Promise<Subject> {
     const subject = await this.dataServices.subjects.findOne(subjectId);
@@ -37,10 +37,10 @@ export class SubjectServices {
     const subject = this.subjectFactoryService.updateSubject(subjectDto);
 
     return await this.dataServices.subjects
-    .update(subjectId, subject)
-    .catch(() => {
-      throw new NotFoundException(`Subject with id: ${subjectId} not found!`);
-    });
+      .update(subjectId, subject)
+      .catch(() => {
+        throw new NotFoundException(`Subject with id: ${subjectId} not found!`);
+      });
   }
 
   async remove(subjectId: string) {

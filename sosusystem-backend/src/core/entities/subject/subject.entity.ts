@@ -1,7 +1,8 @@
-import { Address } from "./address.entity";
-import { FunctionAbility } from "./function-ability/function-ability.entity";
-import { GeneralInformation } from "./general-info/general-info.entity";
-import { HealthCondition } from "./health-condition/health-condition.entity";
+import { Address } from './address.entity';
+import { FunctionAbility } from './function-ability/function-ability.entity';
+import { GeneralInformation } from './general-info/general-info.entity';
+import { HealthCondition } from './health-condition/health-condition.entity';
+import { CreateHealthConditionDto } from '../../dtos';
 
 export class Subject {
   firstName: string;
@@ -10,6 +11,6 @@ export class Subject {
   phone: string;
   address: Address;
   generalInformation: GeneralInformation[];
-  healthConditions: HealthCondition[];
+  healthConditions: CreateHealthConditionDto[];
   functionAbilities: FunctionAbility[];
 }

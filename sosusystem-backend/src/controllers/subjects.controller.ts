@@ -6,21 +6,27 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { SubjectServices } from '../services/use-cases/subjects/subjects.service';
+import { SubjectServices } from '../services/use-cases/subject/subjects.service';
 import {
   SubjectDto,
   Subject,
   UpdateSubjectDto,
+  HealthCondition,
+  UpdateHealthConditionDto,
+  CreateHealthConditionDto,
+  CreateGeneralInfoDto,
 } from '../core';
+import { JwtGuard } from '../auth/guards/jwt.guard';
 
 @Controller('api/subjects')
-// @UseGuards(JwtAuthenticationGuard)
+@UseGuards(JwtGuard)
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectServices) {}
 
   @Post()
-  async create(@Body() createSubjectDto: SubjectDto) {
+  async create(@Body() createSubjectDto: Subject) {
     return this.subjectsService.create(createSubjectDto);
   }
 
