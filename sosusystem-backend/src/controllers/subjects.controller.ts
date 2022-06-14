@@ -22,12 +22,10 @@ import {
   UpdateNoteDto,
   UpdateSubjectDto,
 } from '../core';
-import JwtAuthenticationGuard from '../services/authentication/jwt/jwt-auth.guard';
-import { Roles } from '../services/authentication/roles/roles.decorator';
-import Role from '../services/authentication/roles/role.enum';
+import { JwtGuard } from '../authentication/guards/jwt.guard';
 
 @Controller('api/subjects')
-// @UseGuards(JwtAuthenticationGuard)
+@UseGuards(JwtGuard)
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
@@ -94,20 +92,20 @@ export class SubjectsController {
     );
   }
 
-//  @Get(':subjectId/health-conditions/:healthConditionId/:healthConditionItemId')
- // async findOneHealthConditionItem(
-   // @Param('subjectId') subjectId: string,
-   /// @Param('healthConditionId') healthConditionId: string,
-   // @Param('healthConditionItemId') healthConditionItemId: string,
- // ) {
-   // return this.subjectsService.findOneHealthConditionItem(
-     // subjectId,
-     // healthConditionId,
-     // healthConditionItemId,
-   // );
- // }
-  
-    @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items')
+  //  @Get(':subjectId/health-conditions/:healthConditionId/:healthConditionItemId')
+  // async findOneHealthConditionItem(
+  // @Param('subjectId') subjectId: string,
+  /// @Param('healthConditionId') healthConditionId: string,
+  // @Param('healthConditionItemId') healthConditionItemId: string,
+  // ) {
+  // return this.subjectsService.findOneHealthConditionItem(
+  // subjectId,
+  // healthConditionId,
+  // healthConditionItemId,
+  // );
+  // }
+
+  @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items')
   async findAllHealthConditionItems(
     @Param('subjectId') subjectId: string,
     @Param('healthConditionId') healthConditionId: string,
@@ -117,8 +115,10 @@ export class SubjectsController {
       healthConditionId,
     );
   }
-  
-    @Get(':subjectId/health-conditions/:healthConditionId/health-condition-items/:healthConditionItemId')
+
+  @Get(
+    ':subjectId/health-conditions/:healthConditionId/health-condition-items/:healthConditionItemId',
+  )
   async findOneHealthConditionItem(
     @Param('subjectId') subjectId: string,
     @Param('healthConditionId') healthConditionId: string,
@@ -147,8 +147,8 @@ export class SubjectsController {
       functionAbilityId,
     );
   }
-  
-    @Get(
+
+  @Get(
     ':subjectId/function-abilities/:functionAbilityId/function-ability-items/:functionAbilityItemId',
   )
   async findOneFunctionAbilityItem(

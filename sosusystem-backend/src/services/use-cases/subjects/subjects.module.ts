@@ -3,10 +3,10 @@ import { SubjectsService } from './subjects.service';
 import { SubjectsController } from '../../../controllers/subjects.controller';
 import { MongoDataServicesModule } from '../../../infrastructure/mongodb/mongo-data-services.module';
 import { TitlesGenerator } from './utils/item-titles-generator';
-import { AuthenticationModule } from '../../authentication/authentication.module';
+import { AuthModule } from '../../../authentication/auth.module';
 
 @Module({
-  imports: [MongoDataServicesModule, AuthenticationModule],
+  imports: [MongoDataServicesModule, AuthModule],
   controllers: [SubjectsController],
   providers: [SubjectsService, TitlesGenerator],
   exports: [SubjectsService],

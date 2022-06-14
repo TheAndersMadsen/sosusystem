@@ -1,53 +1,27 @@
-import {
-  Body,
-  Req,
-  Controller,
-  HttpCode,
-  Post,
-  UseGuards,
-  Get,
-  UseInterceptors,
-} from '@nestjs/common';
-import { AuthenticationService } from '../services/authentication/authentication.service';
-import { RegisterDto } from '../core';
-import { LocalAuthenticationGuard } from '../services/authentication/local/local-auth.guard';
-import RequestWithUser from '../services/authentication/requestWithUser.interface';
-import JwtAuthenticationGuard from '../services/authentication/jwt/jwt-auth.guard';
-import * as mongoose from 'mongoose';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { ExistingUserDTO } from '../core';
+import { NewUserDTO } from '../core';
+import { UserDetails } from 'src/user/user-details.interface';
+import { AuthService } from '../authentication/auth.service';
 
-@Controller('authentication')
-export class AuthenticationController {
-  constructor(private readonly authenticationService: AuthenticationService) {}
+@Controller('auth')
+export class AuthController {
+  constructor(private authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() registrationData: RegisterDto) {
-    return this.authenticationService.register(registrationData);
+  register(@Body() user: NewUserDTO): Promise<UserDetails | null> {
+    return this.authService.register(user);
   }
 
-  @HttpCode(200)
-  @UseGuards(LocalAuthenticationGuard)
-  @Post('log-in')
-  async logIn(@Req() request: RequestWithUser) {
-    const { user } = request;
-
-    const token = this.authenticationService.signUser(user.userName);
-
-    return { user, token: token };
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  login(@Body() user: ExistingUserDTO): Promise<{ token: string } | null> {
+    return this.authService.login(user);
   }
 
-  @UseGuards(JwtAuthenticationGuard)
-  @Post('log-out')
-  @HttpCode(200)
-  async logOut(@Req() request: RequestWithUser) {
-    request.res?.setHeader(
-      'Set-Cookie',
-      this.authenticationService.getCookieForLogOut(),
-    );
-  }
-
-  @UseGuards(JwtAuthenticationGuard)
-  @Get()
-  authenticate(@Req() request: RequestWithUser) {
-    return request.user;
+  @Post('verify-jwt')
+  @HttpCode(HttpStatus.OK)
+  verifyJwt(@Body() payload: { jwt: string }) {
+    return this.authService.verifyJwt(payload.jwt);
   }
 }
