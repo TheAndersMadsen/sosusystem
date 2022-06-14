@@ -1,12 +1,12 @@
 <!---- The top navigation bar, that is shown on all views ---->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
   <a class="navbar-brand" routerLink="/subjects" routerLinkActive="active">
     <img
-      src="/assets/sosu-logo.png"
-      width="50"
-      height="50"
-      class="d-inline-block align-top"
-      alt=""
+            src="/assets/sosu-logo.png"
+            width="50"
+            height="50"
+            class="d-inline-block align-top"
+            alt=""
     />
     {{ title }}
   </a>
@@ -15,11 +15,11 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a style="color: #487288" class="nav-link" routerLink="/dashboard" routerLinkActive="active"
-          ><h4>Dashboard</h4></a
+        ><h4>Dashboard</h4></a
         >
       </li>
     </ul>
   </div>
 
-  <a style="color: #487288" class="nav-link"  (click)="logout()" ><h4>Log Ud</h4></a>
+  <a style="color: #487288" class="nav-link"  *ngIf="username"  (click)="logout()" ><h4>{{username}} - Log Ud</h4></a>
 </nav>

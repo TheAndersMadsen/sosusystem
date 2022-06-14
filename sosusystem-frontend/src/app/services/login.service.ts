@@ -13,6 +13,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(user: LoginDto): Observable<any> {
-    return this.http.post(`${environment.api}/authentication/log-in`, user);
+    return this.http.post(`${environment.api}/auth/login`, user);
   }
 }

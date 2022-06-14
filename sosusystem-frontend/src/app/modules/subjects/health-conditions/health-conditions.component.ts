@@ -41,6 +41,8 @@ export class HealthConditionsComponent implements OnInit {
 
   onClickItem(hcId : string, title : string, item: HealthConditionItemDto) {
     this.hcId = hcId
+    console.log(this.hcId)
+    console.log(this.item._id)
     this.item = item
     this.title = title
     this._service.getAllHealthItems(this.selectedId,this.hcId).subscribe((healthItemResult) => {
