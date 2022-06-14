@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {Logout} from "../../modules/auth/auth.actions";
-import {Store} from "@ngxs/store";
-import { AuthState } from 'src/app/modules/auth/auth.state';
+import {Select, Store} from "@ngxs/store";
+import {AuthState, AuthStateModel} from 'src/app/modules/auth/auth.state';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,24 +11,29 @@ import { AuthState } from 'src/app/modules/auth/auth.state';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+
+  @Select(AuthState) username$: Observable<AuthStateModel>;
+
   @Input()
   title: string;
 
+
   @Input()
-  username: string | null
+  username: string;
 
   constructor(private store: Store, private router: Router) {
-    this.username = this.store.selectSnapshot(AuthState.user)
+    this.username$.subscribe(u => {
+      this.username = u.username
+    });
   }
 
   ngOnInit(): void {
   }
 
-
   logout() {
-    this.store.dispatch(new Logout()).subscribe((data) => {
-      this.router.navigate(['/login']);
-    });
+    this.store
+        .dispatch(new Logout())
+        .subscribe(() => { void this.router.navigate(['/login']); }
+    );
   }
-
 }

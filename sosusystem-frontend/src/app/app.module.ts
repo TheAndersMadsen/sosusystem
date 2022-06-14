@@ -41,6 +41,7 @@ import {JwtInterceptor} from "./modules/auth/helpers/http-interceptor";
   ],
   bootstrap: [AppComponent],
   providers: [AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ,],
 })
 export class AppModule { }

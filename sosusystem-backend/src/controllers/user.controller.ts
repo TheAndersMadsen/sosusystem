@@ -1,6 +1,6 @@
 import { UserService } from '../services/use-cases/users/users.service';
 import { Controller, Get, Param } from '@nestjs/common';
-import { UserDetails } from '../user/user-details.interface';
+import { UserDetails } from '../services/use-cases/users/user-details.interface';
 
 @Controller('user')
 export class UsersController {

@@ -12,8 +12,6 @@ import {SubjectDto} from "../../dtos/subject.dto";
 export class DashboardComponent implements OnInit {
     searchText: any;
     subjects$: any;
-    $error: string | undefined;
-    public subjectId: string;
     selectedId: string;
     selectedFirstName: string;
     selectedLastName: string;

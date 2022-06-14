@@ -23,7 +23,6 @@ export class GeneralInfoComponent implements OnInit {
     phone: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     address: new FormGroup({
-      address: new FormControl('', Validators.required),
       street: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       postCode: new FormControl('', Validators.required)

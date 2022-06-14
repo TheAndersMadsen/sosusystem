@@ -20,13 +20,8 @@ export interface AuthStateModel {
 @Injectable()
 export class AuthState {
     @Selector()
-    static token(state: AuthStateModel): string | null {
+    static token(state: AuthStateModel): string {
         return state.token;
-    }
-
-    @Selector()
-    static user(state: AuthStateModel): string | null {
-        return state.username;
     }
 
     @Selector()
@@ -36,7 +31,7 @@ export class AuthState {
 
     constructor(private authService: LoginService) {}
 
-    @Action(Login)
+    @Action(Login, { cancelUncompleted: true })
     login(ctx: StateContext<AuthStateModel>, action: Login) {
         return this.authService.login(action.payload).pipe(
             tap((result: { token: string, username: string }) => {
@@ -47,7 +42,7 @@ export class AuthState {
             })
         );
     }
-    @Action(Logout)
+    @Action(Logout, { cancelUncompleted: true })
     logout({ setState }: StateContext<AuthStateModel>) {
         setState(
             {

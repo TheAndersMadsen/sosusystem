@@ -1,5 +1,5 @@
 import { ExistingUserDTO } from '../core';
-import { UserDetails } from './../user/user-details.interface';
+import { UserDetails } from '../services/use-cases/users/user-details.interface';
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 
 import * as bcrypt from 'bcrypt';

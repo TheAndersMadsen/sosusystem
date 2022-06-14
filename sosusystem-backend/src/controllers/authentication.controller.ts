@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ExistingUserDTO } from '../core';
 import { NewUserDTO } from '../core';
-import { UserDetails } from 'src/user/user-details.interface';
+import { UserDetails } from 'src/services/use-cases/users/user-details.interface';
 import { AuthService } from '../authentication/auth.service';
 
 @Controller('auth')
