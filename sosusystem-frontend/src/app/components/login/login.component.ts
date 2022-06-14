@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.store.dispatch(new Login(this.form.getRawValue())).subscribe((data) => {
+    this.store.dispatch(new Login(this.form.getRawValue())).subscribe(() => {
       this.router.navigate(['/dashboard']);
     });
   }
