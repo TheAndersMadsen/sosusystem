@@ -34,4 +34,4 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env
+../../../../Downloads/sosusystem-76956ed9307cc52d8d4bb637c5ff206a5d900b62/sosusystem-backend/.env

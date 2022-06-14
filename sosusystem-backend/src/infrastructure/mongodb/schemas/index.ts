@@ -6,4 +6,4 @@ export * from './subject/health-condition/health-condition.schema';
 export * from './subject/health-condition/health-condition-item.schema';
 export * from './subject/function-ability/function-ability.schema';
 export * from './subject/function-ability/function-ability-item.schema';
-export * from './subject/note.schema';
+//export * from './subject/note.schema';

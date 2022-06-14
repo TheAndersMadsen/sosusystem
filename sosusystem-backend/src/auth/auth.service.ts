@@ -22,11 +22,7 @@ export class AuthService {
   async register(user: Readonly<NewUserDTO>): Promise<UserDetails> {
     const { name, username, password } = user;
 
-    const existingUser = await this.userService.create(
-      name,
-      username,
-      password,
-    );
+    const existingUser = await this.userService.findByUsername(username);
 
     if (existingUser)
       throw new HttpException(
@@ -41,7 +37,7 @@ export class AuthService {
       username,
       hashedPassword,
     );
-    return this.userService.getUserDetails(newUser);
+    return this.userService._getUserDetails(newUser);
   }
 
   async doesPasswordMatch(
