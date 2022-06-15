@@ -17,6 +17,8 @@ export interface AuthStateModel {
         token: '',
     }
 })
+
+
 @Injectable()
 export class AuthState {
     @Selector()

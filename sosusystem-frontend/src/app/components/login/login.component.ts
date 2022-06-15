@@ -9,8 +9,6 @@ import {Login} from "../../modules/auth/auth.actions";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  searchText: any;
   form: FormGroup;
   constructor(private store: Store,
               private fb: FormBuilder,

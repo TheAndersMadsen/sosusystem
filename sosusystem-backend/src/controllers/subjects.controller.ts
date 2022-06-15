@@ -22,7 +22,7 @@ import {
   UpdateNoteDto,
   UpdateSubjectDto,
 } from '../core';
-import { JwtGuard } from '../authentication/guards/jwt.guard';
+import { JwtGuard } from '../services/authentication/guards/jwt.guard';
 
 @Controller('api/subjects')
 @UseGuards(JwtGuard)

@@ -1,11 +1,11 @@
-import { ExistingUserDTO } from '../core';
-import { UserDetails } from '../services/use-cases/users/user-details.interface';
+import { ExistingUserDTO } from '../../core';
+import { UserDetails } from '../use-cases/users/user-details.interface';
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 
 import * as bcrypt from 'bcrypt';
-import { NewUserDTO } from '../core';
+import { NewUserDTO } from '../../core';
 
-import { UserService } from '../services/use-cases/users/users.service';
+import { UserService } from '../use-cases/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
